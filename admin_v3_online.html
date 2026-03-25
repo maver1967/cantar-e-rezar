@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Cantar e Rezar</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:     #0e0700;
+  --bg2:    #1a0e00;
+  --bg3:    #221400;
+  --bg4:    #2a1800;
+  --gold:   #c8960c;
+  --gold2:  #e8b832;
+  --gold-d: #7a5a08;
+  --cream:  #f5ead8;
+  --cream2: #d4c4a0;
+  --text2:  #9a8866;
+  --border: #332200;
+  --green:  #2a6a30;
+  --green2: #4aaa55;
+  --red:    #8b1a1a;
+  --red2:   #d04040;
+  --blue:   #1a3a6a;
+  --blue2:  #5090d0;
+  --yellow: #c8960c;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg);color:var(--cream);font-size:16px;min-height:100vh;}
+
+/* ── HEADER ── */
+.header{
+  background:linear-gradient(180deg,#250e00,var(--bg2));
+  border-bottom:2px solid var(--gold-d);
+  padding:1.5rem 1.5rem 1rem;
+  position:sticky;top:0;z-index:100;
+}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;}
+.logo{font-family:'IM Fell English',serif;font-size:1.4rem;color:var(--gold2);display:flex;align-items:center;gap:.5rem;}
+.logo .cross{font-size:1.1rem;color:var(--gold-d);}
+.badge-admin{background:var(--bg3);border:1px solid var(--gold-d);border-radius:3px;padding:.2rem .6rem;font-size:.75rem;color:var(--gold-d);letter-spacing:.1em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.header-warn{background:rgba(200,150,12,.08);border:1px solid rgba(200,150,12,.2);border-radius:3px;padding:.5rem .85rem;font-size:.82rem;color:var(--text2);font-style:italic;}
+.header-warn strong{color:var(--gold-d);}
+
+/* ── SETUP BANNER ── */
+#setup-banner{
+  background:linear-gradient(135deg,#2a1000,#1a0a00);
+  border:2px dashed var(--gold-d);
+  border-radius:6px;
+  margin:1.5rem;
+  padding:1.5rem;
+}
+#setup-banner h2{font-family:'IM Fell English',serif;font-size:1.3rem;color:var(--gold2);margin-bottom:.75rem;}
+#setup-banner p{font-size:.95rem;color:var(--cream2);line-height:1.7;margin-bottom:.75rem;}
+#setup-banner code{font-family:'JetBrains Mono',monospace;background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:.15rem .5rem;font-size:.88rem;color:var(--gold2);}
+.setup-url-field{display:flex;gap:.5rem;margin-top:1rem;}
+.setup-url-field input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:3px;color:var(--cream);font-family:'JetBrains Mono',monospace;font-size:.88rem;padding:.6rem .85rem;outline:none;}
+.setup-url-field input:focus{border-color:var(--gold-d);}
+.setup-url-field button{background:var(--gold);color:var(--bg);border:none;border-radius:3px;font-family:'IM Fell English',serif;font-size:1rem;padding:.6rem 1.2rem;cursor:pointer;white-space:nowrap;}
+.setup-url-field button:hover{background:var(--gold2);}
+
+/* ── MAIN CONTENT ── */
+.main{padding:1.25rem 1.5rem;max-width:760px;margin:0 auto;}
+
+/* ── STATS ── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.5rem;}
+.stat{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1rem;text-align:center;}
+.stat-n{font-family:'IM Fell English',serif;font-size:2rem;line-height:1;}
+.stat-l{font-size:.8rem;color:var(--text2);margin-top:.2rem;letter-spacing:.05em;}
+.stat-total .stat-n{color:var(--cream2);}
+.stat-active .stat-n{color:var(--green2);}
+.stat-used   .stat-n{color:var(--blue2);}
+.stat-revoked .stat-n{color:var(--red2);}
+
+/* ── SECTIONS ── */
+.section{background:var(--bg2);border:1px solid var(--border);border-radius:5px;margin-bottom:1.25rem;overflow:hidden;}
+.section-head{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
+.section-head:hover{background:var(--bg3);}
+.section-title{font-family:'IM Fell English',serif;font-size:1.15rem;color:var(--gold2);}
+.section-chevron{color:var(--gold-d);font-size:.85rem;transition:transform .2s;}
+.section-body{padding:1.25rem;}
+.section.collapsed .section-body{display:none;}
+.section.collapsed .section-chevron{transform:rotate(-90deg);}
+
+/* ── FORM ── */
+.field{margin-bottom:1rem;}
+.field label{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold-d);margin-bottom:.35rem;}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:3px;
+  color:var(--cream);font-family:'Crimson Pro',serif;font-size:1rem;
+  padding:.6rem .85rem;outline:none;transition:border-color .2s;
+}
+.field input:focus,.field select:focus{border-color:var(--gold-d);}
+.field input::placeholder{color:#4a3820;}
+.field select option{background:var(--bg2);}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+
+/* ── RESULT BOX ── */
+.result-box{
+  display:none;
+  background:linear-gradient(135deg,#1a0a00,#0e0500);
+  border:1px solid var(--gold-d);
+  border-radius:4px;
+  padding:1.25rem;
+  margin-top:1rem;
+  text-align:center;
+}
+.result-box.visible{display:block;}
+.result-code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:2.2rem;
+  font-weight:600;
+  color:var(--gold2);
+  letter-spacing:.18em;
+  cursor:pointer;
+  padding:.5rem;
+  border-radius:3px;
+  transition:background .15s;
+  display:inline-block;
+}
+.result-code:hover{background:rgba(200,150,12,.1);}
+.result-hint{font-size:.8rem;color:var(--text2);font-style:italic;margin:.3rem 0 1rem;}
+.result-msg{
+  background:var(--bg3);border:1px solid var(--border);border-radius:3px;
+  padding:.75rem 1rem;font-size:.88rem;color:var(--cream2);
+  text-align:left;line-height:1.6;white-space:pre-wrap;
+  font-family:'Crimson Pro',serif;margin-bottom:1rem;
+}
+.copy-note{font-size:.78rem;color:var(--green2);margin-bottom:.5rem;min-height:1.1rem;}
+
+/* ── VERIFY ── */
+.verify-result{
+  margin-top:.75rem;padding:.75rem 1rem;border-radius:3px;
+  font-size:.95rem;min-height:2.5rem;display:none;
+}
+.verify-result.ok  {background:rgba(42,106,48,.2);border:1px solid var(--green); color:var(--green2);display:block;}
+.verify-result.err {background:rgba(139,26,26,.2);border:1px solid var(--red);   color:var(--red2);  display:block;}
+
+/* ── BUTTONS ── */
+.btn-row{display:flex;gap:.6rem;flex-wrap:wrap;}
+.btn{border:none;border-radius:3px;font-family:'IM Fell English',serif;font-size:1rem;cursor:pointer;padding:.65rem 1.2rem;transition:all .2s;white-space:nowrap;}
+.btn-gold   {background:var(--gold);  color:var(--bg);}
+.btn-gold:hover{background:var(--gold2);}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text2);}
+.btn-outline:hover{border-color:var(--gold-d);color:var(--cream2);}
+.btn-red    {background:var(--red);   color:var(--cream);}
+.btn-red:hover{background:var(--red2);}
+.btn-green  {background:var(--green); color:var(--cream);}
+.btn-green:hover{background:var(--green2);color:var(--bg);}
+.btn-sm{font-size:.88rem;padding:.45rem .85rem;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* ── TABLE ── */
+.registry-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;font-size:.88rem;}
+th{background:var(--bg3);border-bottom:2px solid var(--gold-d);padding:.6rem .75rem;text-align:left;font-family:'IM Fell English',serif;font-size:.95rem;color:var(--gold-d);font-weight:normal;white-space:nowrap;}
+td{border-bottom:1px solid var(--border);padding:.55rem .75rem;vertical-align:middle;}
+tr:hover td{background:var(--bg3);}
+.empty-row td{text-align:center;color:var(--text2);font-style:italic;padding:1.5rem;}
+.tag{display:inline-block;border-radius:2px;padding:.1rem .45rem;font-size:.7rem;letter-spacing:.05em;font-family:'JetBrains Mono',monospace;}
+.tag-activo  {background:rgba(42,106,48,.2);border:1px solid var(--green); color:var(--green2);}
+.tag-usado   {background:rgba(26,58,106,.2);border:1px solid var(--blue);  color:var(--blue2);}
+.tag-revogado{background:rgba(139,26,26,.2);border:1px solid var(--red);   color:var(--red2);}
+.code-mono{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--gold2);letter-spacing:.08em;}
+.tbl-btns{display:flex;gap:.3rem;}
+.tbl-btns button{font-size:.72rem;padding:.2rem .5rem;border:1px solid var(--border);border-radius:2px;background:var(--bg2);color:var(--text2);cursor:pointer;transition:all .15s;}
+.tbl-btns button:hover{background:var(--bg3);}
+.tbl-btns .btn-revoke:hover{border-color:var(--red);color:var(--red2);}
+.tbl-btns .btn-unrevo:hover{border-color:var(--green);color:var(--green2);}
+
+/* ── LOADING SPINNER ── */
+.spinner{display:none;margin:1rem auto;width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;}
+.spinner.visible{display:block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── NOTICE ── */
+.notice{padding:.65rem 1rem;border-radius:3px;font-size:.88rem;margin:.5rem 0;}
+.notice-info{background:rgba(26,58,106,.15);border:1px solid var(--blue);color:var(--blue2);}
+.notice-warn{background:rgba(200,150,12,.08);border:1px solid rgba(200,150,12,.3);color:var(--gold);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:480px){
+  .stats{grid-template-columns:repeat(2,1fr);}
+  .field-row{grid-template-columns:1fr;}
+  .main{padding:.85rem 1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="pwd-gate" style="
+  position:fixed;inset:0;background:#1a0a00;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:9999;gap:1.2rem;padding:2rem;">
+  <div style="font-size:2.5rem;">✝</div>
+  <div style="color:#c9a84c;font-size:1.4rem;font-weight:700;font-family:serif;">Cantar e Rezar</div>
+  <div style="color:#a07830;font-size:0.9rem;font-style:italic;margin-bottom:0.5rem;">Painel de administração</div>
+  <input id="pwd-input" type="password" placeholder="Palavra-passe"
+    style="width:260px;padding:0.8rem 1rem;border-radius:8px;border:1px solid #c9a84c;
+    background:#2a1500;color:#f5e6c8;font-size:1rem;text-align:center;outline:none;"
+    onkeypress="if(event.key==='Enter')checkPwd()">
+  <button onclick="checkPwd()" style="
+    width:260px;padding:0.8rem;border-radius:8px;border:none;
+    background:#c9a84c;color:#1a0a00;font-size:1rem;font-weight:700;cursor:pointer;">
+    Entrar
+  </button>
+  <div id="pwd-err" style="color:#e05050;font-size:0.85rem;min-height:1.2rem;"></div>
+</div>
+<script>
+function checkPwd() {
+  var val = document.getElementById('pwd-input').value;
+  if (val === 'CantarRezar2026!') {
+    document.getElementById('pwd-gate').style.display = 'none';
+    document.getElementById('app-content').style.display = 'block';
+    loadRegistry();
+  } else {
+    document.getElementById('pwd-err').textContent = 'Palavra-passe incorrecta.';
+    document.getElementById('pwd-input').value = '';
+    document.getElementById('pwd-input').focus();
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('pwd-input').focus();
+});
+</script>
+
+<div id="app-content" style="display:none;">
+<div class="header">
+  <div class="header-top">
+    <div class="logo"><span class="cross">✝</span> Cantar e Rezar</div>
+    <div class="badge-admin">⚙ Admin</div>
+  </div>
+  <div class="header-warn">
+    <strong>Uso exclusivo do administrador.</strong> Guarda este ficheiro num local seguro. Não partilhes com ninguém.
+  </div>
+</div>
+
+<!-- setup banner removed - URL hardcoded -->
+
+<div class="main" id="main-content" style="display:none">
+
+  <!-- ── STATS ── -->
+  <div class="stats">
+    <div class="stat stat-active">  <div class="stat-n" id="s-active">—</div>  <div class="stat-l">Activos</div>  </div>
+    <div class="stat stat-used">    <div class="stat-n" id="s-used">—</div>    <div class="stat-l">Utilizados</div></div>
+    <div class="stat stat-revoked"> <div class="stat-n" id="s-revoked">—</div> <div class="stat-l">Revogados</div> </div>
+  </div>
+
+  <!-- ── GERAR CÓDIGO ── -->
+  <div class="section" id="sec-generate">
+    <div class="section-head" onclick="toggleSection('sec-generate')">
+      <div class="section-title">✦ Gerar Novo Código</div>
+      <div class="section-chevron">▼</div>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field">
+          <label>Nome do destinatário</label>
+          <input type="text" id="gen-name" placeholder="Ex: João Silva">
+        </div>
+        <div class="field">
+          <label>Contacto (WhatsApp)</label>
+          <input type="text" id="gen-contact" placeholder="Ex: +258 84 123 4567">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Forma de pagamento</label>
+          <select id="gen-payment">
+            <option value="E-Mola">E-Mola</option>
+            <option value="M-Pesa">M-Pesa</option>
+            <option value="Oferta">Oferta</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Notas (opcional)</label>
+          <input type="text" id="gen-notes" placeholder="Ex: Paróquia de Inhambane">
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-gold" onclick="generateCode()" id="btn-generate">✦ Gerar e Registar</button>
+      </div>
+      <div class="spinner" id="gen-spinner"></div>
+      <div id="gen-err" style="color:var(--red2);font-size:.9rem;margin-top:.5rem;min-height:1.2rem;"></div>
+
+      <div class="result-box" id="result-box">
+        <div class="result-code" id="result-code" onclick="copyCode()" title="Clique para copiar"></div>
+        <div class="result-hint">Toque no código para copiar</div>
+        <div class="copy-note" id="copy-note"></div>
+        <div class="result-msg" id="result-msg"></div>
+        <div class="btn-row" style="justify-content:center;">
+          <button class="btn btn-gold btn-sm" onclick="copyCode()">📋 Copiar Código</button>
+          <button class="btn btn-outline btn-sm" onclick="copyMsg()">📱 Copiar Mensagem WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── VERIFICAR CÓDIGO ── -->
+  <div class="section collapsed" id="sec-verify">
+    <div class="section-head" onclick="toggleSection('sec-verify')">
+      <div class="section-title">🔍 Verificar Código</div>
+      <div class="section-chevron">▼</div>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label>Código</label>
+        <input type="text" id="val-code" placeholder="XXXX-XXXX" maxlength="9"
+          oninput="fmtCode(this,'val-code')" style="font-family:'JetBrains Mono',monospace;font-size:1.3rem;letter-spacing:.12em;text-align:center;">
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="verifyCode()">Verificar</button>
+      </div>
+      <div class="spinner" id="verify-spinner"></div>
+      <div class="verify-result" id="val-result"></div>
+    </div>
+  </div>
+
+  <!-- ── REGISTO DE CÓDIGOS ── -->
+  <div class="section collapsed" id="sec-registry">
+    <div class="section-head" onclick="toggleSection('sec-registry')">
+      <div class="section-title">📋 Registo de Códigos</div>
+      <div class="section-chevron">▼</div>
+    </div>
+    <div class="section-body">
+      <div class="btn-row" style="margin-bottom:1rem;">
+        <button class="btn btn-outline btn-sm" onclick="loadRegistry()">🔄 Actualizar</button>
+        <button class="btn btn-outline btn-sm" onclick="exportCSV()">⬇ Exportar CSV</button>
+      </div>
+      <div class="spinner" id="reg-spinner"></div>
+      <div class="registry-wrap">
+        <table id="registry-table">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>Contacto</th>
+              <th>Pagamento</th>
+              <th>Estado</th>
+              <th>Criação</th>
+              <th>Activação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="registry-body">
+            <tr class="empty-row"><td colspan="8">Carregue em "Actualizar" para ver os códigos.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+// ══════════════════════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════════════════════
+const ADMIN_SECRET = "CantarRezar2026!";  // ← deve ser igual ao Apps Script
+const SECRET       = "CSFM-MAXIXE-2026"; // ← deve ser igual ao Apps Script (para hash local)
+const URL_KEY      = "cr_admin_url";
+
+const HARDCODED_URL = "https://script.google.com/macros/s/AKfycbwc7f7YAr4T2WfKKqKgABVTp0DbzXgn142nHvhp0iT-ZMwGg3PVsRdsDHgQrQzto8GX/exec";
+let SCRIPT_URL = localStorage.getItem(URL_KEY) || HARDCODED_URL;
+let registryData = [];
+
+// ══════════════════════════════════════════════════════
+// SETUP
+// ══════════════════════════════════════════════════════
+function init() {
+  // Show UI immediately, then load registry in background
+  document.getElementById("main-content").style.display = "block";
+  // Update stats to show loading
+  document.getElementById("s-active").textContent  = "…";
+  document.getElementById("s-used").textContent    = "…";
+  document.getElementById("s-revoked").textContent = "…";
+  // Load registry silently
+  setTimeout(function() { loadRegistry(); }, 100);
+}
+
+function saveUrl() {
+  const v = document.getElementById("url-input").value.trim();
+  if (!v.startsWith("https://script.google.com")) {
+    alert("URL inválido. Deve começar por https://script.google.com/...");
+    return;
+  }
+  SCRIPT_URL = v;
+  localStorage.setItem(URL_KEY, SCRIPT_URL);
+  init();
+}
+
+// ══════════════════════════════════════════════════════
+// HASH LOCAL (mesmo algoritmo do Apps Script, para gerar codes)
+// ══════════════════════════════════════════════════════
+function sha256(msg) {
+  let h1=0x6a09e667,h2=0xbb67ae85,h3=0x3c6ef372,h4=0xa54ff53a;
+  for(let i=0;i<msg.length;i++){
+    const c=msg.charCodeAt(i);
+    h1=Math.imul(h1^c,0x9e3779b9)>>>0;
+    h2=Math.imul(h2^c,0x85ebca6b)>>>0;
+    h3=Math.imul(h3^(h1>>>16),0xc2b2ae35)>>>0;
+    h4=Math.imul(h4^(h2>>>16),0x165667b1)>>>0;
+    h1=((h1<<13)|(h1>>>19))^h2;
+    h2=((h2<<17)|(h2>>>15))^h3;
+    h3=((h3<<5) |(h3>>>27))^h4;
+    h4=((h4<<3) |(h4>>>29))^h1;
+  }
+  return [h1,h2,h3,h4].map(x=>(x>>>0).toString(16).padStart(8,'0')).join('');
+}
+
+function makeCodeId() {
+  // Random 4-char alphanumeric ID
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let id = "";
+  for(let i=0; i<4; i++) id += chars[Math.floor(Math.random()*chars.length)];
+  return id;
+}
+
+function buildCode(id) {
+  const h = sha256(SECRET + id);
+  const cs = h.slice(0,4).toUpperCase();
+  return id + "-" + cs;
+}
+
+// ══════════════════════════════════════════════════════
+// API CALL via JSONP (funciona de file:// sem CORS)
+// ══════════════════════════════════════════════════════
+function api(params) {
+  return new Promise((resolve, reject) => {
+    const cbName = "_cr_cb_" + Date.now() + "_" + Math.floor(Math.random()*9999);
+    const timeout = setTimeout(() => {
+      delete window[cbName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+      reject(new Error("Timeout"));
+    }, 15000);
+
+    window[cbName] = function(data) {
+      clearTimeout(timeout);
+      delete window[cbName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+      resolve(data);
+    };
+
+    const url = new URL(SCRIPT_URL);
+    for (const [k,v] of Object.entries(params))
+      url.searchParams.set(k, v);
+    url.searchParams.set("callback", cbName);
+
+    const script = document.createElement("script");
+    script.src = url.toString();
+    script.onerror = () => {
+      clearTimeout(timeout);
+      delete window[cbName];
+      reject(new Error("Erro de rede"));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+// ══════════════════════════════════════════════════════
+// GERAR CÓDIGO
+// ══════════════════════════════════════════════════════
+async function generateCode() {
+  const name    = document.getElementById("gen-name").value.trim();
+  const contact = document.getElementById("gen-contact").value.trim();
+  const payment = document.getElementById("gen-payment").value;
+  const notes   = document.getElementById("gen-notes").value.trim();
+  const errEl   = document.getElementById("gen-err");
+  errEl.textContent = "";
+  document.getElementById("result-box").classList.remove("visible");
+
+  if (!name)    { errEl.textContent = "Nome obrigatório."; return; }
+  if (!contact) { errEl.textContent = "Contacto obrigatório."; return; }
+
+  // Generate a unique code
+  const id   = makeCodeId();
+  const code = buildCode(id);
+
+  setLoading("gen", true);
+  try {
+    const result = await api({
+      action  : "register",
+      secret  : ADMIN_SECRET,
+      code    : code,
+      name    : name,
+      contact : contact,
+      payment : payment,
+      notes   : notes
+    });
+    if (result.status !== "ok") {
+      errEl.textContent = result.message || "Erro ao registar.";
+      return;
+    }
+    // Show result
+    document.getElementById("result-code").textContent = code;
+    const msg = buildWhatsAppMsg(code, name, payment);
+    document.getElementById("result-msg").textContent = msg;
+    document.getElementById("result-box").classList.add("visible");
+    document.getElementById("copy-note").textContent = "";
+    // Reload stats
+    loadRegistry();
+    // Clear form
+    document.getElementById("gen-name").value    = "";
+    document.getElementById("gen-contact").value = "";
+    document.getElementById("gen-notes").value   = "";
+  } catch(e) {
+    errEl.textContent = "Erro de ligação ao servidor. Verifica a ligação à internet e o URL do script.";
+  } finally {
+    setLoading("gen", false);
+  }
+}
+
+function buildWhatsAppMsg(code, name, payment) {
+  const firstName = name.split(" ")[0];
+  return `Olá ${firstName}! 😊\n\nO teu contributo via ${payment} foi recebido. Obrigado!\n\nAqui está o teu código de activação para a app *Cantar e Rezar*:\n\n🔑 *${code}*\n\nPara activar:\n1. Abre a app\n2. Introduz o código acima\n3. Toca em *Activar*\n\nBoa oração! ✝`;
+}
+
+function copyCode() {
+  const code = document.getElementById("result-code").textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    document.getElementById("copy-note").textContent = "✓ Código copiado!";
+    setTimeout(()=>document.getElementById("copy-note").textContent="", 2000);
+  }).catch(()=>{
+    // Fallback
+    const el = document.getElementById("result-code");
+    const range = document.createRange();
+    range.selectNode(el);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.getElementById("copy-note").textContent = "✓ Seleccionado. Copia manualmente.";
+  });
+}
+
+function copyMsg() {
+  const msg = document.getElementById("result-msg").textContent;
+  navigator.clipboard.writeText(msg).then(() => {
+    document.getElementById("copy-note").textContent = "✓ Mensagem copiada!";
+    setTimeout(()=>document.getElementById("copy-note").textContent="", 2000);
+  });
+}
+
+// ══════════════════════════════════════════════════════
+// VERIFICAR CÓDIGO
+// ══════════════════════════════════════════════════════
+async function verifyCode() {
+  const code   = document.getElementById("val-code").value.toUpperCase().trim();
+  const resEl  = document.getElementById("val-result");
+  resEl.className = "verify-result";
+  if (!code) { resEl.classList.add("err"); resEl.textContent = "Introduz um código."; return; }
+
+  setLoading("verify", true);
+  try {
+    // Find in local registry data first
+    const entry = registryData.find(r => r.code === code);
+    if (entry) {
+      const estado = entry.status;
+      if (estado === "activo") {
+        resEl.classList.add("ok");
+        resEl.textContent = `✓ Código válido e ainda não utilizado.\nNome: ${entry.name} · ${entry.payment}`;
+      } else if (estado === "usado") {
+        const d = entry.activated ? new Date(entry.activated).toLocaleString("pt") : "—";
+        resEl.classList.add("err");
+        resEl.textContent = `✗ Código já utilizado.\nActivado em: ${d}`;
+      } else if (estado === "revogado") {
+        resEl.classList.add("err");
+        resEl.textContent = "✗ Código revogado.";
+      }
+    } else {
+      // Try server
+      const result = await api({ action:"activate", code, device:"ADMIN_VERIFY_ONLY" });
+      // We just check but don't want to actually mark as used — use list action
+      resEl.classList.add("err");
+      resEl.textContent = result.status === "ok"
+        ? "✓ Código válido (não está no registo local — carrega o registo)"
+        : "✗ " + (result.message || "Código inválido.");
+    }
+  } catch(e) {
+    resEl.classList.add("err");
+    resEl.textContent = "Erro de ligação.";
+  } finally {
+    setLoading("verify", false);
+    resEl.style.display = "block";
+  }
+}
+
+// ══════════════════════════════════════════════════════
+// REGISTO / LISTAGEM
+// ══════════════════════════════════════════════════════
+async function loadRegistry() {
+  setLoading("reg", true);
+  document.getElementById("s-active").textContent  = "…";
+  document.getElementById("s-used").textContent    = "…";
+  document.getElementById("s-revoked").textContent = "…";
+  try {
+    const result = await api({ action:"list", secret:ADMIN_SECRET });
+    if (result.status !== "ok") {
+      document.getElementById("registry-body").innerHTML =
+        `<tr class="empty-row"><td colspan="8" style="color:var(--red2)">Erro: ${result.message}</td></tr>`;
+      document.getElementById("s-active").textContent  = "–";
+      document.getElementById("s-used").textContent    = "–";
+      document.getElementById("s-revoked").textContent = "–";
+      return;
+    }
+    registryData = result.codes || [];
+    renderRegistry();
+    updateStats();
+  } catch(e) {
+    document.getElementById("registry-body").innerHTML =
+      `<tr class="empty-row"><td colspan="8" style="color:var(--red2)">Sem ligação ao servidor. Verifica a internet e tenta recarregar.</td></tr>`;
+    document.getElementById("s-active").textContent  = "–";
+    document.getElementById("s-used").textContent    = "–";
+    document.getElementById("s-revoked").textContent = "–";
+  } finally {
+    setLoading("reg", false);
+  }
+}
+
+function renderRegistry() {
+  const tbody = document.getElementById("registry-body");
+  if (!registryData.length) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="8">Nenhum código registado ainda.</td></tr>`;
+    return;
+  }
+  const sorted = [...registryData].sort((a,b)=>new Date(b.created)-new Date(a.created));
+  tbody.innerHTML = sorted.map(r => {
+    const created   = r.created   ? new Date(r.created).toLocaleDateString("pt")   : "—";
+    const activated = r.activated ? new Date(r.activated).toLocaleDateString("pt") : "—";
+    const tagClass  = "tag-" + (r.status || "activo");
+    const tagLabel  = r.status || "activo";
+    const btnRevoke = r.status !== "revogado"
+      ? `<button class="btn-revoke" onclick="revokeCode('${r.code}')">Revogar</button>`
+      : `<button class="btn-unrevo" onclick="unrevoCode('${r.code}')">Reactivar</button>`;
+    return `<tr>
+      <td><span class="code-mono">${r.code}</span></td>
+      <td>${r.name || "—"}</td>
+      <td>${r.contact || "—"}</td>
+      <td>${r.payment || "—"}</td>
+      <td><span class="tag ${tagClass}">${tagLabel}</span></td>
+      <td>${created}</td>
+      <td>${activated}</td>
+      <td><div class="tbl-btns">${btnRevoke}</div></td>
+    </tr>`;
+  }).join("");
+}
+
+function updateStats() {
+  const active  = registryData.filter(r=>r.status==="activo").length;
+  const used    = registryData.filter(r=>r.status==="usado").length;
+  const revoked = registryData.filter(r=>r.status==="revogado").length;
+  document.getElementById("s-active").textContent  = active;
+  document.getElementById("s-used").textContent    = used;
+  document.getElementById("s-revoked").textContent = revoked;
+}
+
+// ══════════════════════════════════════════════════════
+// REVOGAR / REACTIVAR
+// ══════════════════════════════════════════════════════
+async function revokeCode(code) {
+  if (!confirm(`Revogar o código ${code}?\nO utilizador não conseguirá mais entrar na app.`)) return;
+  try {
+    const r = await api({ action:"revoke", code, secret:ADMIN_SECRET });
+    if (r.status === "ok") { await loadRegistry(); }
+    else alert("Erro: " + r.message);
+  } catch(e) { alert("Erro de ligação."); }
+}
+
+async function unrevoCode(code) {
+  if (!confirm(`Reactivar o código ${code}?`)) return;
+  try {
+    const r = await api({ action:"unrevo", code, secret:ADMIN_SECRET });
+    if (r.status === "ok") { await loadRegistry(); }
+    else alert("Erro: " + r.message);
+  } catch(e) { alert("Erro de ligação."); }
+}
+
+// ══════════════════════════════════════════════════════
+// EXPORT CSV
+// ══════════════════════════════════════════════════════
+function exportCSV() {
+  if (!registryData.length) { alert("Sem dados para exportar."); return; }
+  const header = ["Código","Nome","Contacto","Pagamento","Notas","Estado","Criação","Activação"];
+  const rows = registryData.map(r => [
+    r.code, r.name, r.contact, r.payment, r.notes, r.status,
+    r.created  ? new Date(r.created).toLocaleString("pt")  : "",
+    r.activated? new Date(r.activated).toLocaleString("pt"): ""
+  ].map(v => `"${(v||"").replace(/"/g,'""')}"`).join(","));
+  const csv = [header.join(","), ...rows].join("\n");
+  const blob = new Blob(["\ufeff"+csv], {type:"text/csv;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "cantar_e_rezar_codigos_" + new Date().toISOString().slice(0,10) + ".csv";
+  a.click();
+}
+
+// ══════════════════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════════════════
+function fmtCode(el) {
+  let v = el.value.replace(/[^A-Za-z0-9]/g,"").toUpperCase();
+  if(v.length>4) v=v.slice(0,4)+"-"+v.slice(4,8);
+  el.value=v;
+}
+
+function toggleSection(id) {
+  document.getElementById(id).classList.toggle("collapsed");
+}
+
+function setLoading(prefix, on) {
+  const sp = document.getElementById(prefix+"-spinner");
+  if(sp) sp.classList.toggle("visible", on);
+  if(prefix==="gen"){
+    const btn=document.getElementById("btn-generate");
+    if(btn) btn.disabled=on;
+  }
+}
+
+// ── INIT ──
+init();
+</script>
+</div>
+</body>
+</html>
