@@ -276,13 +276,12 @@ document.addEventListener('DOMContentLoaded', function() {
       <div id="gen-err" style="color:var(--red2);font-size:.9rem;margin-top:.5rem;min-height:1.2rem;"></div>
 
       <div class="result-box" id="result-box">
-        <div class="result-code" id="result-code" onclick="copyCode()" title="Clique para copiar"></div>
-        <div class="result-hint">Toque no código para copiar</div>
+        <div class="result-code" id="result-code" title="Código"></div>
+        <div id="result-link" style="margin:.5rem 0 .3rem;font-size:.82rem;word-break:break-all;color:var(--gold);opacity:.85;"></div>
         <div class="copy-note" id="copy-note"></div>
-        <div class="result-msg" id="result-msg"></div>
-        <div class="btn-row" style="justify-content:center;">
+        <div class="btn-row" style="justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;">
           <button class="btn btn-gold btn-sm" onclick="copyCode()">📋 Copiar Código</button>
-          <button class="btn btn-outline btn-sm" onclick="copyMsg()">📱 Copiar Mensagem WhatsApp</button>
+          <button class="btn btn-outline btn-sm" onclick="copyLink()">🔗 Copiar Link</button>
         </div>
       </div>
     </div>
@@ -497,8 +496,9 @@ async function generateCode() {
     }
     // Show result
     document.getElementById("result-code").textContent = code;
-    const msg = buildWhatsAppMsg(code, name, payment);
-    document.getElementById("result-msg").textContent = msg;
+    const link = `https://maver1967.github.io/cantar-e-rezar/?code=${code}`;
+    document.getElementById("result-link").textContent = link;
+    document.getElementById("result-link").dataset.link = link;
     document.getElementById("result-box").classList.add("visible");
     document.getElementById("copy-note").textContent = "";
     // Reload stats
