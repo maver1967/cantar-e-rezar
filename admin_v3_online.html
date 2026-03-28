@@ -520,6 +520,22 @@ function buildWhatsAppMsg(code, name, payment) {
   return `Olá ${firstName}! 😊\n\nO teu contributo via ${payment} foi recebido. Obrigado!\n\nAqui está o teu acesso à app *Cantar e Rezar*:\n\n👉 ${link}\n\nAbre o link, o código já está preenchido. Toca apenas em *Activar*!\n\nBoa oração! ✝`;
 }
 
+function copyLink() {
+  const el = document.getElementById("result-link");
+  const link = (el && el.dataset.link) ? el.dataset.link : (el ? el.textContent : "");
+  if (!link) return;
+  navigator.clipboard.writeText(link).then(() => {
+    document.getElementById("copy-note").textContent = "✓ Link copiado!";
+    setTimeout(() => { document.getElementById("copy-note").textContent = ""; }, 2000);
+  }).catch(() => {
+    const ta = document.createElement("textarea");
+    ta.value = link; document.body.appendChild(ta); ta.select();
+    document.execCommand("copy"); document.body.removeChild(ta);
+    document.getElementById("copy-note").textContent = "✓ Link copiado!";
+    setTimeout(() => { document.getElementById("copy-note").textContent = ""; }, 2000);
+  });
+}
+
 function copyCode() {
   const code = document.getElementById("result-code").textContent;
   navigator.clipboard.writeText(code).then(() => {
