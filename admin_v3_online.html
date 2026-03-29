@@ -168,6 +168,9 @@ tr:hover td{background:var(--bg3);}
 .tbl-btns button:hover{background:var(--bg3);}
 .tbl-btns .btn-revoke:hover{border-color:var(--red);color:var(--red2);}
 .tbl-btns .btn-unrevo:hover{border-color:var(--green);color:var(--green2);}
+.btn-copy-link{font-size:.85rem;padding:.1rem .35rem;border:1px solid var(--border);border-radius:2px;background:var(--bg2);color:var(--gold);cursor:pointer;transition:all .15s;line-height:1.4;}
+.btn-copy-link:hover{background:var(--bg3);border-color:var(--gold);}
+.btn-copy-link.copied{color:var(--green2);border-color:var(--green);}
 
 /* ── LOADING SPINNER ── */
 .spinner{display:none;margin:1rem auto;width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;}
@@ -330,11 +333,12 @@ document.addEventListener('DOMContentLoaded', function() {
               <th>Estado</th>
               <th>Criação</th>
               <th>Activação</th>
+              <th>Link</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody id="registry-body">
-            <tr class="empty-row"><td colspan="8">Carregue em "Actualizar" para ver os códigos.</td></tr>
+            <tr class="empty-row"><td colspan="9">Carregue em "Actualizar" para ver os códigos.</td></tr>
           </tbody>
         </table>
       </div>
@@ -520,22 +524,6 @@ function buildWhatsAppMsg(code, name, payment) {
   return `Olá ${firstName}! 😊\n\nO teu contributo via ${payment} foi recebido. Obrigado!\n\nAqui está o teu acesso à app *Cantar e Rezar*:\n\n👉 ${link}\n\nAbre o link, o código já está preenchido. Toca apenas em *Activar*!\n\nBoa oração! ✝`;
 }
 
-function copyLink() {
-  const el = document.getElementById("result-link");
-  const link = (el && el.dataset.link) ? el.dataset.link : (el ? el.textContent : "");
-  if (!link) return;
-  navigator.clipboard.writeText(link).then(() => {
-    document.getElementById("copy-note").textContent = "✓ Link copiado!";
-    setTimeout(() => { document.getElementById("copy-note").textContent = ""; }, 2000);
-  }).catch(() => {
-    const ta = document.createElement("textarea");
-    ta.value = link; document.body.appendChild(ta); ta.select();
-    document.execCommand("copy"); document.body.removeChild(ta);
-    document.getElementById("copy-note").textContent = "✓ Link copiado!";
-    setTimeout(() => { document.getElementById("copy-note").textContent = ""; }, 2000);
-  });
-}
-
 function copyCode() {
   const code = document.getElementById("result-code").textContent;
   navigator.clipboard.writeText(code).then(() => {
@@ -557,6 +545,24 @@ function copyMsg() {
   navigator.clipboard.writeText(msg).then(() => {
     document.getElementById("copy-note").textContent = "✓ Mensagem copiada!";
     setTimeout(()=>document.getElementById("copy-note").textContent="", 2000);
+  });
+}
+
+function copyLinkRow(code, btn) {
+  const link = "https://maver1967.github.io/cantar-e-rezar/?code=" + code;
+  const finish = () => {
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = "✓";
+      btn.classList.add("copied");
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove("copied"); }, 1800);
+    }
+  };
+  navigator.clipboard.writeText(link).then(finish).catch(() => {
+    const ta = document.createElement("textarea");
+    ta.value = link; document.body.appendChild(ta); ta.select();
+    document.execCommand("copy"); document.body.removeChild(ta);
+    finish();
   });
 }
 
@@ -616,7 +622,7 @@ async function loadRegistry() {
     const result = await api({ action:"list", secret:ADMIN_SECRET });
     if (result.status !== "ok") {
       document.getElementById("registry-body").innerHTML =
-        `<tr class="empty-row"><td colspan="8" style="color:var(--red2)">Erro: ${result.message}</td></tr>`;
+        `<tr class="empty-row"><td colspan="9" style="color:var(--red2)">Erro: ${result.message}</td></tr>`;
       document.getElementById("s-active").textContent  = "–";
       document.getElementById("s-used").textContent    = "–";
       document.getElementById("s-revoked").textContent = "–";
@@ -627,7 +633,7 @@ async function loadRegistry() {
     updateStats();
   } catch(e) {
     document.getElementById("registry-body").innerHTML =
-      `<tr class="empty-row"><td colspan="8" style="color:var(--red2)">Sem ligação ao servidor. Verifica a internet e tenta recarregar.</td></tr>`;
+      `<tr class="empty-row"><td colspan="9" style="color:var(--red2)">Sem ligação ao servidor. Verifica a internet e tenta recarregar.</td></tr>`;
     document.getElementById("s-active").textContent  = "–";
     document.getElementById("s-used").textContent    = "–";
     document.getElementById("s-revoked").textContent = "–";
@@ -639,7 +645,7 @@ async function loadRegistry() {
 function renderRegistry() {
   const tbody = document.getElementById("registry-body");
   if (!registryData.length) {
-    tbody.innerHTML = `<tr class="empty-row"><td colspan="8">Nenhum código registado ainda.</td></tr>`;
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="9">Nenhum código registado ainda.</td></tr>`;
     return;
   }
   const sorted = [...registryData].sort((a,b)=>new Date(b.created)-new Date(a.created));
@@ -651,6 +657,7 @@ function renderRegistry() {
     const btnRevoke = r.status !== "revogado"
       ? `<button class="btn-revoke" onclick="revokeCode('${r.code}')">Revogar</button>`
       : `<button class="btn-unrevo" onclick="unrevoCode('${r.code}')">Reactivar</button>`;
+    const link = `https://maver1967.github.io/cantar-e-rezar/?code=${r.code}`;
     return `<tr>
       <td><span class="code-mono">${r.code}</span></td>
       <td>${r.name || "—"}</td>
@@ -659,6 +666,7 @@ function renderRegistry() {
       <td><span class="tag ${tagClass}">${tagLabel}</span></td>
       <td>${created}</td>
       <td>${activated}</td>
+      <td><button class="btn-copy-link" title="${link}" onclick="copyLinkRow('${r.code}', this)">📋</button></td>
       <td><div class="tbl-btns">${btnRevoke}</div></td>
     </tr>`;
   }).join("");
