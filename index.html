@@ -447,10 +447,10 @@ body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg);color:var(--cr
       <div class="label"><span style="opacity:.45;font-size:.85em;margin-right:.25em">C</span> CANTEMOS</div>
       <div class="sub">Em breve…</div>
     </div>
-    <div class="home-card" onclick="showSoon()" style="--card-color:#9a7830;opacity:.65">
+    <div class="home-card" onclick="openPortugues()" style="--card-color:#9a7830">
       <span class="icon">🎶</span>
-      <div class="label"><span style="opacity:.45;font-size:.85em;margin-right:.25em">D</span> OUTROS CÂNTICOS</div>
-      <div class="sub">Em breve…</div>
+      <div class="label"><span style="opacity:.45;font-size:.85em;margin-right:.25em">C</span> OUTROS CÂNTICOS</div>
+      <div class="sub">Cânticos em Português</div>
     </div>
     <div class="home-divider"><span>Oração &amp; Liturgia</span></div>
     <div class="home-card home-card-prayer" onclick="openSection('oracoes-rosario')" style="--card-color:#6aaa50">
@@ -3606,92 +3606,109 @@ const CANTICOS_CH = [
     {type:'verse',label:'3ª Estrofe',text:'A mbilu yaku yi drivala Hosi\nYi wongiwa hi swa misava.\nNkama wa hundra, wene makweru,\nKe sala nkamanyana ntsena.'}
   ]},
   {id:154,num:'176',title:'Tamela Vito la Yesu',cat:'Quaresma',lang:'ch',parts:[
-    {type:'chorus',label:'Refrão',text:'Ndza mu rhandza Yesu, Ndza mu rhandza Yesu, Muponisi wanga. 3. A twile xirilo xamina, Tixaniseko hinkwato; A ndzi khoma hi mavoko, Muhlayisi wanga.'},
-    {type:'verse',label:'1ª Estrofe',text:'2. Tamela vito la Yesu; Yesu a ndzi fele mina Li ni lisima ngopfu Le xihambanwini Li sasekile tindleveni Ndza dzunisa ngati yakwe A Vito la Yesu Mufeli wa mina. Coro: Ndza mu rhandza Yesu, Ndza mu rhandza Yesu, Muponisi wanga.'},
-    {type:'verse',label:'3ª Estrofe',text:'A twile xirilo xamina, Tixaniseko hinkwato; A ndzi khoma hi mavoko, Muhlayisi wanga.'}
+    {type:'verse',label:'1ª Estrofe',text:'Tamela vito la Yesu; \nLi ni lisima ngopfu \nLi sasekile tindleveni \nA Vito la Yesu'},
+    {type:'chorus',label:'Refrão',text:'Ndza mu rhandza Yesu,\nNdza mu rhandza Yesu,\nMuponisi wanga. (bis)'},
+    {type:'verse',label:'2ª Estrofe',text:'Yesu a ndzi fele mina\nLe xihambanwini\nNdza dzunisa ngati yakwe\nMufeli wa mina.'},
+    {type:'verse',label:'3ª Estrofe',text:'A twile xirilo xamina,\nTixaniseko hinkwato;\nA ndzi khoma hi mavoko,\nMuhlayisi wanga.'}
   ]},
   {id:155,num:'177',title:'Tatana Hosi Yanga',cat:'Quaresma',lang:'ch',parts:[
-    {type:'chorus',label:'Refrão',text:'Yo ndzi rivalele Coro: Yo ndzi kombelele Yo ndzi rivalele, Hosi Yo ndzi kombelele, Hosi Yo ndzi rivalele, Yo ndzi kombelele. We Hosi ya mina. We Hosi ya mina. 353'},
-    {type:'verse',label:'1ª Estrofe',text:'2. Tatana Hosi yanga Ndzo kokiwa hi nala; Himinna wa mudjohi A ndzi komba titsomba Ndzi ta yentxa yini xana Ndzi ta yendla yini, xana, We Hosi yamina We Hosi yamina. Coro: Yo ndzi rivalele Coro: Yo ndzi kombelele Yo ndzi rivalele, Hosi Yo ndzi kombelele, Hosi Yo ndzi rivalele, Yo ndzi kombelele. We Hosi ya mina. We Hosi ya mina. 353'}
+    {type:'verse',label:'1ª Estrofe',text:'Tatana Hosi yanga \nHiminna wa mudjohi \nNdzi ta yentxa yini xana \nWe Hosi yamina '},
+    {type:'chorus',label:'Refrão',text:'Yo ndzi rivalele \nYo ndzi rivalele, Hosi \nYo ndzi rivalele,\nWe Hosi ya mina. '},
+    {type:'verse',label:'2ª Estrofe',text:'Ndzo kokiwa hi nala;\nA ndzi komba titsomba\nNdzi ta yendla yini, xana,\nWe Hosi yamina.'},
+    {type:'chorus',label:'Refrão',text:'Yo ndzi kombelele\nYo ndzi kombelele, Hosi\nYo ndzi kombelele.\nWe Hosi ya mina.'}
   ]},
   {id:156,num:'178',title:'U Nga Hundzi We Tatana',cat:'Quaresma',lang:'ch',parts:[
-    {type:'chorus',label:'Refrão',text:'Ka mina, ka mina Ndzi twele a wusiwana 2. 4. U nga hundzi, Muhuluxi Ni lirhandzu la Xikwembu, Ndza namarela Wena, Ni wunene la Yesu, Leswi u nga vita vanhu Ni Wusiwana la Tatana Nyika vito ka mina. A swi pfune ka mina. 179 VAMAKWERHU Hl FAMBAKA (165) 1. 2. Vamakwerhu, hi fambaka Swa nononwa a ku hanya A ndleleni le\'yo biha, Ni ku hlula miringo Yesu Kristo Muhuluxi Ha kombela, Wena Hosi Wa vita vana va Yena. U hi nyika matimba. Coro: Swa nandziha ku tsundzuka Bava wa le tilweni. 3. 4. Hi vayendzi misaveni Dlhambu le’li kwetsimaka A hi na wutshamo. Kwetsimisa hina vanhu; Xinyama xi hi rhendzele: Hi txukumeta swidjoho Hinkwako ku phumile. Akuva hi ta huluka. 354'},
-    {type:'verse',label:'1ª Estrofe',text:'3. U nga hundzi, We tatana, U nga hundzi Oh! Moya Ndza rila ka Wena. Mudjondzisi wa hina Ndzi mubihi tani leswi Swilo leswi hanyisaka Ndzi twele a wusiwana. Vula swona ka mina'}
+    {type:'verse',label:'1ª Estrofe',text:'U nga hundzi, We tatana, \nNdza rila ka Wena. \nNdzi mubihi tani leswi\nNdzi twele a wusiwana. '},
+    {type:'chorus',label:'Refrão',text:'Ka mina, ka mina\nNdzi twele a wusiwana'},
+    {type:'verse',label:'2ª Estrofe',text:'U nga hundzi, Muhuluxi \nNdza namarela Wena, \nLeswi u nga vita vanhu \nNyika vito ka mina. '},
+    {type:'verse',label:'3ª Estrofe',text:'U nga hundzi Oh! Moya\nMudjondzisi wa hina\nSwilo leswi hanyisaka\nVula swona ka mina'},
+    {type:'verse',label:'4ª Estrofe',text:'Ni lirhandzu la Xikwembu,\nNi wunene la Yesu,\nNi Wusiwana la Tatana\nA swi pfune ka mina.'}
   ]},
   {id:157,num:'180',title:'Vanhu Va Mina',cat:'Quaresma',lang:'ch',parts:[
-    {type:'chorus',label:'Refrão',text:'A twalisiwe, Nwana wa Davida. A twalisiwe Nwana wa Xikwembu 2. - Vanhu va yandlala tinguvu ta vona, hi ku tsaka…..A twalisiwe 3. - A vaheberu na va tamele minsundhu. Va dzunisa Yesu…..A twalisiwe 4. - Va yandlala marhavi ya minsinya na va mu dzunisa…..A twalisiwe 5. - A katekile lweyi a taka hi Vito la Xikwembu…..A twalisiwe 355 6. - Wena U Hosi ya swilo hinkwaswo wa yimbelela…..A twalisiwe'},
-    {type:'verse',label:'1ª Estrofe',text:'2. Vanhu va mina mi yendliwe Vanhu va mina, hi mina hinkwenu; . Mamu tiva xana Yesu? Mi nyikiwe moya I Nwana wa mina yena. Ni miri ni hinkwaswo. A siye tilo la mina A mi ndzi tivi? Hi mina Bava. A ta mi fela xihambanwini. 3. 4. Vanhu va mina, mi nyikiwe Vanhu va mina, swilo hinkwaswo; . Ndza kombela ntsena leswi: Ni tilo ndzi mi tshembisile. Khumbukani ndzilo, Kambe nwina ma yeyisa. Mi tsika swiwonho hinkwaswo Mi yendla yini misaveni? Mi ta nghena a tilweni. 181 YESU NA A NGHENA A YERUSALEMA (Domingo Ramos)'},
-    {type:'verse',label:'1ª Estrofe',text:'- Yesu na a nghena a Yerusalema. A va um dzunisa...A twalisiwe Coro: A twalisiwe, Nwana wa Davida. A twalisiwe Nwana wa Xikwembu'},
-    {type:'verse',label:'2ª Estrofe',text:'- Vanhu va yandlala tinguvu ta vona, hi ku tsaka…..A twalisiwe'},
-    {type:'verse',label:'3ª Estrofe',text:'- A vaheberu na va tamele minsundhu. Va dzunisa Yesu…..A twalisiwe'},
-    {type:'verse',label:'4ª Estrofe',text:'- Va yandlala marhavi ya minsinya na va mu dzunisa…..A twalisiwe'},
-    {type:'verse',label:'5ª Estrofe',text:'- A katekile lweyi a taka hi Vito la Xikwembu…..A twalisiwe 355'},
-    {type:'verse',label:'6ª Estrofe',text:'- Wena U Hosi ya swilo hinkwaswo wa yimbelela…..A twalisiwe'}
+    {type:'verse',label:'1ª Estrofe',text:'Vanhu va mina mi yendliwe \nhi mina hinkwenu; (bis). \nMi nyikiwe moya\nNi miri ni hinkwaswo. \nA mi ndzi tivi? Hi mina Bava. '},
+    {type:'verse',label:'2ª Estrofe',text:'Vanhu va mina,\n Mamu tiva xana Yesu? (bis)\nI Nwana wa mina yena.\nA siye tilo la mina\nA ta mi fela xihambanwini.'},
+    {type:'verse',label:'3ª Estrofe',text:'Vanhu va mina, mi nyikiwe \nswilo hinkwaswo; (bis). \nNi tilo ndzi mi tshembisile. \nKambe nwina ma yeyisa. \nMi yendla yini misaveni? '},
+    {type:'verse',label:'4ª Estrofe',text:'Vanhu va mina,\nNdza kombela ntsena leswi: (bis)\nKhumbukani ndzilo,\nMi tsika swiwonho hinkwaswo\nMi ta nghena a tilweni.'}
   ]},
   {id:158,num:'182',title:'Yo Mhunu wa ku Lahleka',cat:'Quaresma',lang:'ro',parts:[
-    {type:'chorus',label:'Refrão',text:'Xa txhavisa a xihono Le\'xi dlayaka vahoni. 2. - La\'va tshamaka inferno A va pimisanga kone; Kutani va xaniseka Va dzila hi swo swihono. 3. - A ku fa ka vhanu hinkwavo Ku fanana ni ntshamelo; La\'va tshamisaka ha hombe, Ha hombe va nga tifela. TA NKARHI WA PASKWA (Páscoa) 183 A Hl TSAKENI VAMAKWERHU (174) (Mús. de: "Vavasati, vavanuna") 1. - A hi tsakeni, Nwina vamakwerhu, Jesus Cristo Muhuluxi a pfukile; A hlulile matimba ya sathana, Hi wuhosi a humile a sirheni. 356 Coro: A hi khenseni Nkulukumba, Jesus Kristo Muvambiwa a pfukile, Aleluia, aleluia, aleluia, A hi bongeni hi dzunisa Muhuluxi. 2. - Misaveni ku twakala ntsena Nkulungwani wa ku tsaka ka matiko; Ma twalisa, ma tlangela Nkulukumba, Muponisi wa misava, Aleluia. 3. - Nwina hinkwenu, mi lahlekeke, Pfumelani a Hosini, mi ta pona; Jesus Kristo, livoningo la misava, A ku feni a pfukile hi wuhosi.'},
-    {type:'verse',label:'1ª Estrofe',text:'- Yo mhunu wa ku lahleka, Tshika swoswi leyo ndlela, U tifambisa a inferno Le\'dzi ngeke na ku hela. Coro: Xa txhavisa a xihono Le\'xi dlayaka vahoni.'},
-    {type:'verse',label:'2ª Estrofe',text:'- La\'va tshamaka inferno A va pimisanga kone; Kutani va xaniseka Va dzila hi swo swihono.'},
-    {type:'verse',label:'3ª Estrofe',text:'- A ku fa ka vhanu hinkwavo Ku fanana ni ntshamelo; La\'va tshamisaka ha hombe, Ha hombe va nga tifela. TA NKARHI WA PASKWA (Páscoa) 183 A Hl TSAKENI VAMAKWERHU (174) (Mús. de: "Vavasati, vavanuna")'},
-    {type:'verse',label:'1ª Estrofe',text:'- A hi tsakeni, Nwina vamakwerhu, Jesus Cristo Muhuluxi a pfukile; A hlulile matimba ya sathana, Hi wuhosi a humile a sirheni. 356 Coro: A hi khenseni Nkulukumba, Jesus Kristo Muvambiwa a pfukile, Aleluia, aleluia, aleluia, A hi bongeni hi dzunisa Muhuluxi.'},
-    {type:'verse',label:'2ª Estrofe',text:'- Misaveni ku twakala ntsena Nkulungwani wa ku tsaka ka matiko; Ma twalisa, ma tlangela Nkulukumba, Muponisi wa misava, Aleluia.'},
-    {type:'verse',label:'3ª Estrofe',text:'- Nwina hinkwenu, mi lahlekeke, Pfumelani a Hosini, mi ta pona; Jesus Kristo, livoningo la misava, A ku feni a pfukile hi wuhosi.'}
+    {type:'verse',label:'1ª Estrofe',text:'Yo mhunu wa ku lahleka,\nTshika swoswi leyo ndlela,\nU tifambisa a inferno\nLe\'dzi ngeke na ku hela.'},
+    {type:'chorus',label:'Refrão',text:'Xa txhavisa a xihono (bis)\nLe\'xi dlayaka vahoni.'},
+    {type:'verse',label:'2ª Estrofe',text:'La\'va tshamaka inferno\nA va pimisanga kone;\nKutani va xaniseka\nVa dzila hi swo swihono.'},
+    {type:'verse',label:'3ª Estrofe',text:'A ku fa ka vhanu hinkwavo\nKu fanana ni ntshamelo;\nLa\'va tshamisaka ha hombe,\nHa hombe va nga tifela.'}
   ]},
-  {id:159,num:'184',title:'Aleluia, Aleluia, Aleluia',cat:'Quaresma',lang:'ch',parts:[
-    {type:'chorus',label:'Refrão',text:'Aleluia, Aleluia, Aleluia, Ku yimbelela ka va Maria; A pfukile Yesu Kristo. Amém 1. 2. Pfuka, pfuka, pfuka, Hlula, hlula, hlula U ya hlomela sirheni, Na wena u mukriste, Xirhumbi a xi kona; Kombela u ta hlula. Ku hluliwe a lifo hi ku pfuka. 185 HINKWERU Hl NYOXILE (176) (Ronga) 1 - Hinkweru hi nyoxile, 2 - A feli hine Kristo A hi yimbeleleni: Hi ko ku doha kweru Aleluia, aleluia, A te ta fela hine Hosi Yesu a pfukile. A lahliwe sirheni. 357 3 - A yetlelile kone A masiku manharu; A pfukile ni wuhosi Ni ntamu lo\'wukulu.'}
+  {id:159,num:'184',title:'Aleluia, Aleluia, Aleluia',cat:'Páscoa',lang:'ch',parts:[
+    {type:'chorus',label:'Refrão',text:'Aleluia, Aleluia, Aleluia,\nKu yimbelela ka va Maria;\nA pfukile Yesu Kristo. Ámen'},
+    {type:'verse',label:'1ª Estrofe',text:'Pfuka, pfuka, pfuka, \nU ya hlomela sirheni, \nXirhumbi a xi kona; \nKu hluliwe a lifo hi ku pfuka.'},
+    {type:'verse',label:'2ª Estrofe',text:'Hlula, hlula, hlula\nNa wena u mukriste,\nKombela u ta hlula.\n'}
   ]},
-  {id:160,num:'186',title:'Hosi, Hosi Aleluia',cat:'Quaresma',lang:'ro',parts:[
-    {type:'chorus',label:'Refrão',text:'Hosi, Hosi, aleluia (3 v.) A hi khensa Yesu. 1. - A hi yimbeleleni tinsimu ta ku drumisa Yesu Kriste Hosi yeru a hi thlanganisiki A lirandrwini dra Nkulukumba Tatanà weru A hi khenseni Yesu. 2. - Yesu Kriste i mutiruli wa vhanu hinkwavu A hlulile a satana, a pfukile ku vafi, Swoswi a wa fuma hi masiku ni hi minkama, A hi khenseni Yesu. 3. - A hi pfukeni xikanwe ni Hosi vamakweru Ka vurongo bra xihono, hi thloma a swithlomo Swa livaningo lakwe li vaningaka hinkwavu, A hi khenseni Yesu.'},
-    {type:'verse',label:'1ª Estrofe',text:'- A hi yimbeleleni tinsimu ta ku drumisa Yesu Kriste Hosi yeru a hi thlanganisiki A lirandrwini dra Nkulukumba Tatanà weru A hi khenseni Yesu.'},
-    {type:'verse',label:'2ª Estrofe',text:'- Yesu Kriste i mutiruli wa vhanu hinkwavu A hlulile a satana, a pfukile ku vafi, Swoswi a wa fuma hi masiku ni hi minkama, A hi khenseni Yesu.'},
-    {type:'verse',label:'3ª Estrofe',text:'- A hi pfukeni xikanwe ni Hosi vamakweru Ka vurongo bra xihono, hi thloma a swithlomo Swa livaningo lakwe li vaningaka hinkwavu, A hi khenseni Yesu.'}
+  {id:160,num:'186',title:'Hosi, Hosi Aleluia',cat:'Páscoa',lang:'ro',parts:[
+    {type:'chorus',label:'Refrão',text:'Hosi, Hosi, aleluia (3 v.) \nA hi khensa Yesu. '},
+    {type:'verse',label:'1ª Estrofe',text:'A hi yimbeleleni tinsimu ta ku drumisa\nYesu Kriste Hosi yeru a hi thlanganisiki\nA lirandrwini dra Nkulukumba Tatanà weru\nA hi khenseni Yesu.'},
+    {type:'verse',label:'2ª Estrofe',text:'Yesu Kriste i mutiruli wa vhanu hinkwavu\nA hlulile a satana, a pfukile ku vafi,\nSwoswi a wa fuma hi masiku ni hi minkama,\nA hi khenseni Yesu.'},
+    {type:'verse',label:'3ª Estrofe',text:'A hi pfukeni xikanwe ni Hosi vamakweru\nKa vurongo bra xihono, hi thloma a swithlomo\nSwa livaningo lakwe li vaningaka hinkwavu,\nA hi khenseni Yesu.'}
   ]},
-  {id:161,num:'187',title:'Vavasati, Vavanuna Lavisani',cat:'Quaresma',lang:'ro',parts:[
-    {type:'chorus',label:'Refrão',text:'Ina, hi swone, a pfukile, Yesu Kristo Nkulukumba Hosi yeru. Aleleuia, aleluia, aleluia! A hi nyoxeni, a hi tshaveni timbilu teru. 2. - Vavasati va pfuka ni mixo, A. ndleleni swa ku tota va xavile. A ku thlasa ka vone a Kalvário A va mu kume, Yesu a pfukile. 3. - A tintrumi tibidzi ti phatimaka Ti va brela va nga txhavi va nga drili Yesu Kristo wa le ka Nazaré A sirheni a nga kone, a pfukile. TA KU XIKA KA MOYA WA KU KWETSIMA (Pentecostes)'},
-    {type:'verse',label:'1ª Estrofe',text:'- Vavasati, vavanuna lavisani A. xinyama xa wusiku xi helile; Yesu Kristo a nga dambu dza misava a sirheni a nga kona: a pfukile. 358 Coro: Ina, hi swone, a pfukile, Yesu Kristo Nkulukumba Hosi yeru. Aleleuia, aleluia, aleluia! A hi nyoxeni, a hi tshaveni timbilu teru.'},
-    {type:'verse',label:'2ª Estrofe',text:'- Vavasati va pfuka ni mixo, A. ndleleni swa ku tota va xavile. A ku thlasa ka vone a Kalvário A va mu kume, Yesu a pfukile.'},
-    {type:'verse',label:'3ª Estrofe',text:'- A tintrumi tibidzi ti phatimaka Ti va brela va nga txhavi va nga drili Yesu Kristo wa le ka Nazaré A sirheni a nga kone, a pfukile. TA KU XIKA KA MOYA WA KU KWETSIMA (Pentecostes)'}
+  {id:161,num:'187',title:'Vavasati, Vavanuna Lavisani',cat:'Páscoa',lang:'ro',parts:[
+    {type:'verse',label:'1ª Estrofe',text:'Vavasati, vavanuna lavisani\nA xinyama xa wusiku xi helile;\nYesu Kristo a nga dambu dza misava\na sirheni a nga kona: a pfukile.'},
+    {type:'chorus',label:'Refrão',text:'Ina, hi swone, a pfukile,\nYesu Kristo Nkulukumba Hosi yeru. (bis)\nAleleuia, aleluia, aleluia!\nA hi nyoxeni, a hi tshaveni timbilu teru.'},
+    {type:'verse',label:'2ª Estrofe',text:'Vavasati va pfuka ni mixo,\nA ndleleni swa ku tota va xavile.\nA ku thlasa ka vone a Kalvário\nA va mu kume, Yesu a pfukile.'},
+    {type:'verse',label:'3ª Estrofe',text:'A tintrumi tibidzi ti phatimaka\nTi va brela va nga txhavi va nga drili\nYesu Kristo wa le ka Nazaré\nA sirheni a nga kone, a pfukile.'}
   ]},
   {id:162,num:'188',title:'Buya Buya Espirito Santo',cat:'Pentecostes',lang:'ch',parts:[
-    {type:'verse',label:'1ª Estrofe',text:'2. Buya, buya Espirito Santo, Ndzilo wunene wa lirhandzu Buya mimoyeni yeru; buya u hi tshivelela; A timpswalo ta wutomi Wa hela ntamu weru Txhela ka timbilu teru. Timbilo ta timekela. 3. 4. Moya wa ku hlawuleka, Yentxa leswaku hi rhandza Ina, buya, buya swoswi; Tatana, Nwana wa Wena Kulisa a likholo leru Nkulukumba munwe ntsena U hi tamelela, Hosi. Hi mu luva a tilweni. 359'}
+    {type:'verse',label:'1ª Estrofe',text:'Buya, buya Espirito Santo, \nBuya mimoyeni yeru; \nA timpswalo ta wutomi \nTxhela ka timbilu teru. '},
+    {type:'verse',label:'2ª Estrofe',text:'Ndzilo wunene wa lirhandzu\nbuya u hi tshivelela;\nWa hela ntamu weru\nTimbilo ta timekela.'},
+    {type:'verse',label:'3ª Estrofe',text:'Moya wa ku hlawuleka, \nIna, buya, buya swoswi; \nKulisa a likholo leru \nU hi tamelela, Hosi. '},
+    {type:'verse',label:'4ª Estrofe',text:'Yentxa leswaku hi rhandza\nTatana, Nwana wa Wena\nNkulukumba munwe ntsena\nHi mu luva a tilweni.'}
   ]},
   {id:163,num:'189',title:'Hosi Yi Laya Vadrondrisiwa',cat:'Pentecostes',lang:'ro',parts:[
-    {type:'chorus',label:'Refrão',text:'Moya ... Moya ... Moya Wa ku Xwenga . 2 - Yohane a hlaya: ndri mi txhela mati Kambe ku ta ta Yesu A ta n\'wi babatisa Hi moya lo\'wa ku xwenga.'},
-    {type:'verse',label:'1ª Estrofe',text:'3. Hosi yi laya vadrondrisiwa: A hi hlalelen\' timpralo leto Tshamisani Yerusalema Ta Moya lo\'wa ku Xwenga Ndri ta nwi babatisa Wu xika la misaven\' Hi Moya lo\'wa ku Xwenga. Wu pfa hi le ku Yehova. Coro: Moya ... Moya ... Moya Wa ku Xwenga . 2 - Yohane a hlaya: ndri mi txhela mati Kambe ku ta ta Yesu A ta n\'wi babatisa Hi moya lo\'wa ku xwenga.'}
+    {type:'verse',label:'1ª Estrofe',text:'Hosi yi laya vadrondrisiwa: \nTshamisani Yerusalema \nNdri ta nwi babatisa \nHi Moya lo\'wa ku Xwenga. (bis) '},
+    {type:'chorus',label:'Refrão',text:'Moya ... Moya ...\nMoya Wa ku Xwenga (bis).'},
+    {type:'verse',label:'2ª Estrofe',text:'Yohane a hlaya: ndri mi txhela mati\nKambe ku ta ta Yesu\nA ta n\'wi babatisa\nHi moya lo\'wa ku xwenga. (bis)'},
+    {type:'verse',label:'3ª Estrofe',text:'A hi hlalelen\' timpralo leto\nTa Moya lo\'wa ku Xwenga\nWu xika la misaven\'\nWu pfa hi le ku Yehova. (bis)'}
   ]},
-  {id:164,num:'190',title:'Moya wa ku Hlawuleka',cat:'Pentecostes',lang:'ro',parts:[
-    {type:'chorus',label:'Refrão',text:'Nkulukumba Espirito Santo Hi ku pfela tilweni A xikele ku vaapostolo Loko ve he a misaveni. 2. - A wusiwana la masiku La\'ma nga matxhume ntsena Li helise hi Espirito Santo Loko a yendze misaveni. 360'},
-    {type:'verse',label:'1ª Estrofe',text:'- Moya wa Ku hlawuleka, 3 - Ndzilo wunene wa lirhandzo Buya u hi tshivelela; Muhelisi wa wurombe, Hi mindzilo ya lirhandzo Tamelela moya werhu, Moya weru u vaningela. U wu vekisa ha hombe. Coro: Nkulukumba Espirito Santo Hi ku pfela tilweni A xikele ku vaapostolo Loko ve he a misaveni.'},
-    {type:'verse',label:'2ª Estrofe',text:'- A wusiwana la masiku La\'ma nga matxhume ntsena Li helise hi Espirito Santo Loko a yendze misaveni. 360'}
+  {id:164,num:'190',title:'Moya wa ku Hlawuleka',cat:'Pentecostes',lang:'ch',parts:[
+    {type:'verse',label:'1ª Estrofe',text:'Moya wa Ku hlawuleka,\nBuya u hi tshivelela; \nHi mindzilo ya lirhandzo \nMoya weru u vaningela.'},
+    {type:'chorus',label:'Refrão',text:'Nkulukumba Espirito Santo\nHi ku pfela tilweni\nA xikele ku vaapostolo\nLoko ve he a misaveni.'},
+    {type:'verse',label:'2ª Estrofe',text:'A wusiwana la masiku\nLa\'ma nga matxhume ntsena\nLi helise hi Espirito Santo\nLoko a yendze misaveni.'},
+    {type:'verse',label:'3ª Estrofe',text:'Ndzilo wunene wa lirhandzo\nMuhelisi wa wurombe,\nTamelela moya werhu,\nU wu vekisa ha hombe'}
   ]},
   {id:165,num:'191',title:'Tana Moya wa ku Xwenga',cat:'Pentecostes',lang:'ro',parts:[
-    {type:'chorus',label:'Refrão',text:'Moya wa ku xwenga Tana u nhingena Mbilu yeru ya ku djula Hi xwengise wene Hosi. 3. 4. Moya wa ku Xwenga tana Hi hanani Moya waku Tana hi basise hine Moya waku wa lirhandzu Ha kombela ha swi djula; Moya wa ku Xwenga tana Tana hi xwengise wene. Hi tatise hine nfuri'},
-    {type:'verse',label:'1ª Estrofe',text:'2. Tana Moya wa ku xwenga, Hi we Moya wa wutomi Tana u nhingena wene, Mubasisi wa timbilo Mbilu yeru ya ku djula. Hine vhanu hi va honi; Hi xwengise wene nfuri. Hi xwengise wene nfuri Coro: Moya wa ku xwenga Tana u nhingena Mbilu yeru ya ku djula Hi xwengise wene Hosi. 3. 4. Moya wa ku Xwenga tana Hi hanani Moya waku Tana hi basise hine Moya waku wa lirhandzu Ha kombela ha swi djula; Moya wa ku Xwenga tana Tana hi xwengise wene. Hi tatise hine nfuri'}
+    {type:'verse',label:'1ª Estrofe',text:'Tana Moya wa ku xwenga, \nTana u nhingena wene, \nMbilu yeru ya ku djula. \nHi xwengise wene nfuri. '},
+    {type:'chorus',label:'Refrão',text:'Moya wa ku xwenga\nTana u nhingena\nMbilu yeru ya ku djula\nHi xwengise wene Hosi.'},
+    {type:'verse',label:'2ª Estrofe',text:'Hi we Moya wa wutomi\nMubasisi wa timbilo\nHine vhanu hi va honi;\nHi xwengise wene nfuri'},
+    {type:'verse',label:'3ª Estrofe',text:'Moya wa ku Xwenga tana \nTana hi basise hine \nHa kombela ha swi djula; \nTana hi xwengise wene. '},
+    {type:'verse',label:'4ª Estrofe',text:'Hi hanani Moya waku\nMoya waku wa lirhandzu\nMoya wa ku Xwenga tana\nHi tatise hine nfuri'}
   ]},
   {id:166,num:'192',title:'Tana Moya Wo Saseka',cat:'Pentecostes',lang:'ch',parts:[
-    {type:'chorus',label:'Refrão',text:'Na mina, na mina, Tana u tshama na mina; Tana, Wena, ndzi xurhise, Tana u tshama na mina. 3. 4. Nkulukumba wo saseka, Tana Moya wo saseka Ndza tshindzekela ka Wena. Tana u tsama na mina Ndza pfumela, ndza ku khensa; Ndzi ta kota a ku vula Tana u tshama na mina. Evangeli ya Wena. 361'},
-    {type:'verse',label:'1ª Estrofe',text:'2. Tana Moya wo saseka, Tana Yesu wo saseka, Hlampswa mbilu ya mina; Ndzi twele wusiwana Tana, Wena, xurhise, Tsetselela, ndzi basise Tana u tshama na mina. Tana u tsama na mina Coro: Na mina, na mina, Tana u tshama na mina; Tana, Wena, ndzi xurhise, Tana u tshama na mina. 3. 4. Nkulukumba wo saseka, Tana Moya wo saseka Ndza tshindzekela ka Wena. Tana u tsama na mina Ndza pfumela, ndza ku khensa; Ndzi ta kota a ku vula Tana u tshama na mina. Evangeli ya Wena. 361'}
+    {type:'verse',label:'1ª Estrofe',text:'Tana Moya wo saseka, \nHlampswa mbilu ya mina; \nTana, Wena, xurhise,\nTana u tshama na mina. '},
+    {type:'chorus',label:'Refrão',text:'Na mina, na mina,\nTana u tshama na mina;\nTana, Wena, ndzi xurhise,\nTana u tshama na mina.'},
+    {type:'verse',label:'2ª Estrofe',text:'Tana Yesu wo saseka,\nNdzi twele wusiwana\nTsetselela, ndzi basise\nTana u tsama na mina'},
+    {type:'verse',label:'3ª Estrofe',text:'Nkulukumba wo saseka, \nNdza tshindzekela ka Wena. \nNdza pfumela, ndza ku khensa; \nTana u tshama na mina. '},
+    {type:'verse',label:'4ª Estrofe',text:'Tana Moya wo saseka\nTana u tsama na mina\nNdzi ta kota a ku vula\nEvangeli ya Wena.'}
   ]},
   {id:167,num:'193',title:'Xikwembu hi Rhumele',cat:'Pentecostes',lang:'ch',parts:[
-    {type:'verse',label:'3ª Estrofe',text:'- Hi ta kulisa nfumu waku.'},
-    {type:'verse',label:'4ª Estrofe',text:'- Hi ta kulisa a Kereke.'},
-    {type:'verse',label:'5ª Estrofe',text:'- Hi ta hlayisa swisiwana.'},
-    {type:'verse',label:'6ª Estrofe',text:'- Hi ta djondzisa a majovem.'},
-    {type:'verse',label:'7ª Estrofe',text:'- Hi ta djondzisa vatsongwana. 8 - Hi ta susa a swidjoho. [][][][][][] (Cânticos a Nossa Senhora)'}
+    {type:'chorus',label:'Refrão',text:'Solista: Xikwembu, hi rhumele.\nRefrão: Hi rhumele moya wo basa (4x).'},
+    {type:'verse',label:'1ª Estrofe',text:'Hi ta kota ku ku landza.'},
+    {type:'verse',label:'2ª Estrofe',text:'Hi ta fambisa Evangeli'},
+    {type:'verse',label:'3ª Estrofe',text:'Hi ta kulisa nfumu waku.'},
+    {type:'verse',label:'4ª Estrofe',text:'Hi ta kulisa a Kereke.'},
+    {type:'verse',label:'5ª Estrofe',text:'Hi ta hlayisa swisiwana.'},
+    {type:'verse',label:'6ª Estrofe',text:'Hi ta djondzisa a majovem.'},
+    {type:'verse',label:'7ª Estrofe',text:'Hi ta djondzisa vatsongwana. '},
+    {type:'verse',label:'8ª Estrofe',text:'Hi ta susa a swidjoho'}
   ]},
   {id:168,num:'194',title:'He Bandla la Vakriste',cat:'Mariano',lang:'ch',parts:[
-    {type:'chorus',label:'Refrão',text:'Mamana m\'nene Wa Muhuluxi Yesu, Hi li: He Nkosikazi, Tama u va kona. 3. 4. A tele hi timpswalo, Hi kombelela hina A Hosi yi na wena; Hi nga vadjohi ntsena, U katekile wena Hi kombelele nyamuntlha Ka vavasati hinkwavo. Ni siku hi faka.\nKHANIMAMBU MAMANA MARIA (Ronga) 1. - A Nazaré u yingeli a ntrumi.. Coro: Kanimambo kanimambo Khanimambo Mamana Maria Kanimambo Mamana Maria Yi ku byeliki ku randra ka Hosi khanimambo Mamana Maria Uva u pfumela uku im.................. Khanimambo Mamana Maria U. hi dondrisa na hine ku pfumela... Khanimambo Mamana Maria 2. - Le Ali-kari u yendreli Isabel. Uya mu nika ni wupfunu braku Ava a trhava hi liyendro draku. U. hi dondrisa na hine a ku pfunana 3. - A Belém u veleki Muhuluxi U. tramiki naye ku kuleni kwakwe Na umu tirela hi lirandro U hi drondrisa ku hanya na yene 4. - A Yerusalema u fambi ni Nwanaku. Uya mu nyikela a tempeleni Na u landra a buku dra nawu.. U. hi drondrisa ku lumba a Kereke. 5. - A Kanan u byeli a vatiri. Kuva va landra marito ya Kriste Ntraku hinkwavu va kumi ku trava U. hi dondrisa a ku yingiseta 6. - Kusuhi ni Xihambanu xa Nwanaku U tiyisilile hambi swi ku vavisa Hikuva leyo avi ndlela ya huluxu U hi drondrisa a ku tiyisela 363'},
-    {type:'verse',label:'1ª Estrofe',text:'2. He bandla la vakriste, Swanga hi ntsumi leyi Tanani hi khensa Yi ku xaweteke, Mamana wa timpswalo Xisweswo na va kriste Ta Hosi Yesu. Va ku xaweta. Coro: Mamana m\'nene Wa Muhuluxi Yesu, Hi li: He Nkosikazi, Tama u va kona. 3. 4. A tele hi timpswalo, Hi kombelela hina A Hosi yi na wena; Hi nga vadjohi ntsena, U katekile wena Hi kombelele nyamuntlha Ka vavasati hinkwavo. Ni siku hi faka.\nKHANIMAMBU MAMANA MARIA (Ronga)'},
-    {type:'verse',label:'1ª Estrofe',text:'- A Nazaré u yingeli a ntrumi.. Coro: Kanimambo kanimambo Khanimambo Mamana Maria Kanimambo Mamana Maria Yi ku byeliki ku randra ka Hosi khanimambo Mamana Maria Uva u pfumela uku im.................. Khanimambo Mamana Maria U. hi dondrisa na hine ku pfumela... Khanimambo Mamana Maria'},
-    {type:'verse',label:'2ª Estrofe',text:'- Le Ali-kari u yendreli Isabel. Uya mu nika ni wupfunu braku Ava a trhava hi liyendro draku. U. hi dondrisa na hine a ku pfunana'},
-    {type:'verse',label:'3ª Estrofe',text:'- A Belém u veleki Muhuluxi U. tramiki naye ku kuleni kwakwe Na umu tirela hi lirandro U hi drondrisa ku hanya na yene'},
-    {type:'verse',label:'4ª Estrofe',text:'- A Yerusalema u fambi ni Nwanaku. Uya mu nyikela a tempeleni Na u landra a buku dra nawu.. U. hi drondrisa ku lumba a Kereke.'},
-    {type:'verse',label:'5ª Estrofe',text:'- A Kanan u byeli a vatiri. Kuva va landra marito ya Kriste Ntraku hinkwavu va kumi ku trava U. hi dondrisa a ku yingiseta'},
-    {type:'verse',label:'6ª Estrofe',text:'- Kusuhi ni Xihambanu xa Nwanaku U tiyisilile hambi swi ku vavisa Hikuva leyo avi ndlela ya huluxu U hi drondrisa a ku tiyisela 363'}
+    {type:'verse',label:'1ª Estrofe',text:'He bandla la vakriste,\nTanani hi khensa \nMamana wa timpswalo \nTa Hosi Yesu. '},
+    {type:'chorus',label:'Refrão',text:'Mamana m\'nene\nWa Muhuluxi Yesu,\nHi li: He Nkosikazi, (bis)\nTama u va kona.'},
+    {type:'verse',label:'2ª Estrofe',text:'Swanga hi ntsumi leyi\nYi ku xaweteke,\nXisweswo na va kriste\nVa ku xaweta.'},
+    {type:'verse',label:'3ª Estrofe',text:'A tele hi timpswalo, \nA Hosi yi na wena; \nU katekile wena \nKa vavasati hinkwavo. '},
+    {type:'verse',label:'4ª Estrofe',text:'Hi kombelela hina\nHi nga vadjohi ntsena,\nHi kombelele nyamuntlha\nNi siku hi faka.'}
   ]},
   {id:169,num:'196',title:'Mamana Wanga Maria',cat:'Mariano',lang:'ro',parts:[
-    {type:'chorus',label:'Refrão',text:'Tilweni, tilweni, Ndri ta va na Maria, 3. 4. Ndri ta va na Maria! Yo Mamana Maria, Ndra dumba swone swinene Heswi ndri xisiwana, A ndrhaku ka wutomi Ndri tamele ha hombe, Ndri ta ya ku yene. Ku wene u ndri vitana. 197 MARIA A KHENSIWE (192 ) (Ronga) 1. 2. Maria a khensiwe Maria i xiluva, Hi timbilu teru; Xa ku basa swinene Hi mu twalisa Le\'xi khayiweki Hi lisimu ledri. Le hehla tilweni Coro: Maria, Maria Ha ku khensa,\nMamana. 3. 4. Maria i nyeleti Loko a mathlavi Le\'yi vaningelaka Ma hi sivela dambu, Tintsumi ta tilo Maria a buya Ni lomu lava vakwe. A hi komba lirandru.'},
-    {type:'verse',label:'1ª Estrofe',text:'2. Mamana wanga, Maria, Heswi ndri doheliki Ndri ta nyonxa swinene, A nwana\'ku Maria Ndri ta kuma a ku tshava U ndri kombelela Loko ndri le tilweni. Ndri ta drivaleliwa. Coro: Tilweni, tilweni, Ndri ta va na Maria, 3. 4. Ndri ta va na Maria! Yo Mamana Maria, Ndra dumba swone swinene Heswi ndri xisiwana, A ndrhaku ka wutomi Ndri tamele ha hombe, Ndri ta ya ku yene. Ku wene u ndri vitana. 197 MARIA A KHENSIWE (192 ) (Ronga) 1. 2. Maria a khensiwe Maria i xiluva, Hi timbilu teru; Xa ku basa swinene Hi mu twalisa Le\'xi khayiweki Hi lisimu ledri. Le hehla tilweni Coro: Maria, Maria Ha ku khensa,\nMamana. 3. 4. Maria i nyeleti Loko a mathlavi Le\'yi vaningelaka Ma hi sivela dambu, Tintsumi ta tilo Maria a buya Ni lomu lava vakwe. A hi komba lirandru.'}
+    {type:'chorus',label:'Refrão',text:'Tilweni, tilweni,\nNdri ta va na Maria, (bis)'},
+    {type:'verse',label:'1ª Estrofe',text:'Mamana wanga, Maria,\nNdri ta nyonxa swinene, \nNdri ta kuma a ku tshava \nLoko ndri le tilweni. '},
+    {type:'verse',label:'2ª Estrofe',text:'Heswi ndri doheliki\nA nwana\'ku Maria\nU ndri kombelela\nNdri ta drivaleliwa.'},
+    {type:'verse',label:'3ª Estrofe',text:'Ndri ta va na Maria! \nNdra dumba swone swinene \nA ndrhaku ka wutomi \nNdri ta ya ku yene. '},
+    {type:'verse',label:'4ª Estrofe',text:'Yo Mamana Maria,\nHeswi ndri xisiwana,\nNdri tamele ha hombe,\nKu wene u ndri vitana.'}
   ]},
   {id:170,num:'198',title:'Maria Ntamu Wanga',cat:'Mariano',lang:'ro',parts:[
     {type:'chorus',label:'Refrão',text:'A moya wanga, Mamana Wu tameli wu londrovoti Akuva wu nga kumiwi Hi xiwonho le\'xikulu. 3. 4. Maria ku dumba kwanga Maria mupfuni wanga A u ndri kombelele A undri tele a vurombe A ka yesu Nhwana wa wena Heswi a ndri munhu wa ntxumu A Hosi ya tilo Ndri nga xidohi le‘xikulu.'},
@@ -4093,6 +4110,42 @@ const CANTICOS_CH = [
   {id:'new_174_ro_1776150504872',num:'174',title:'O Hambana',cat:'Quaresma',lang:'ro',parts:[
     {type:'verse',label:'1ª Estrofe',text:'O Hambana ya Xikwembu \nMutotiwa wa tilo: \nU xwengile swa ku nhasi\nWe Nwana wa Xikwembu.\nKambe u hi tekela anandru \nu bratrhi a xihambano \nu kulula va drilaka \nti drilelan\' ali hine. '},
     {type:'verse',label:'2ª Estrofe',text:'U pfumeli hi ku rhula\nva yandlala a mavoko\nnhasi va ku bele atimingu\nKambe u kala a rito\nO Hosi a timingo leto\nleti ku tlhavaka a mbilu\nti vu tranwini branga\nNdri nga munhu lwe wa xambra.'}
+  ]},
+  {id:'new_179_ch_1776167764044',num:'179',title:'Vamakwerhu, hi fambaka',cat:'Quaresma',lang:'ch',parts:[
+    {type:'verse',label:'1ª Estrofe',text:'Vamakwerhu, hi fambaka \nA ndleleni le\'yo biha, \nYesu Kristo Muhuluxi \nWa vita vana va Yena. '},
+    {type:'chorus',label:'Refrão',text:'Swa nandziha ku tsundzuka\nBava wa le tilweni. (bis)'},
+    {type:'verse',label:'2ª Estrofe',text:'Swa nononwa a ku hanya\nNi ku hlula miringo\nHa kombela, Wena Hosi\nU hi nyika matimba.'},
+    {type:'verse',label:'3ª Estrofe',text:'Hi vayendzi misaveni \nA hi na wutshamo. \nXinyama xi hi rhendzele: \nHinkwako ku phumile. '},
+    {type:'verse',label:'4ª Estrofe',text:'Dlhambu le’li kwetsimaka\nKwetsimisa hina vanhu;\nHi txukumeta swidjoho\nAkuva hi ta huluka.'}
+  ]},
+  {id:'new_181_ch_1776168070154',num:'181',title:'Yesu na a nghena a Yerusalema.',cat:'Ramos',lang:'ch',parts:[
+    {type:'verse',label:'1ª Estrofe',text:'Yesu na a nghena a Yerusalema.\nA va um dzunisa...A twalisiwe'},
+    {type:'chorus',label:'Refrão',text:'A twalisiwe, Nwana wa Davida.\nA twalisiwe Nwana wa Xikwembu'},
+    {type:'verse',label:'2ª Estrofe',text:'Vanhu va yandlala tinguvu ta vona,\nhi ku tsaka…..A twalisiwe'},
+    {type:'verse',label:'3ª Estrofe',text:'A vaheberu na va tamele minsundhu.\nVa dzunisa Yesu…..A twalisiwe'},
+    {type:'verse',label:'4ª Estrofe',text:'Va yandlala marhavi ya minsinya na\nva mu dzunisa…..A twalisiwe'},
+    {type:'verse',label:'5ª Estrofe',text:'A katekile lweyi a taka hi Vito\nla Xikwembu…..A twalisiwe'},
+    {type:'verse',label:'6ª Estrofe',text:'Wena U Hosi ya swilo hinkwaswo\nwa yimbelela…..A twalisiwe'}
+  ]},
+  {id:'new_183_ch_1776168219619',num:'183',title:'A hi tsakeni, Nwina vamakwerhu,',cat:'Páscoa',lang:'ch',parts:[
+    {type:'verse',label:'',text:'A hi tsakeni, Nwina vamakwerhu,\nJesus Cristo Muhuluxi a pfukile;\nA hlulile matimba ya sathana,\nHi wuhosi a humile a sirheni.'},
+    {type:'chorus',label:'',text:'hi khenseni Nkulukumba,\nJesus Kristo Muvambiwa a pfukile,\nAleluia, aleluia, aleluia,\nA hi bongeni hi dzunisa Muhuluxi. (bis)'},
+    {type:'verse',label:'',text:'Misaveni ku twakala ntsena\nNkulungwani wa ku tsaka ka matiko;\nMa twalisa, ma tlangela Nkulukumba,\nMuponisi wa misava, Aleluia.'},
+    {type:'verse',label:'',text:'Nwina hinkwenu, mi lahlekeke,\nPfumelani a Hosini, mi ta pona;\nJesus Kristo, livoningo la misava,\nA ku feni a pfukile hi wuhosi.'}
+  ]},
+  {id:'new_185_ro_1776168329018',num:'185',title:'Hinkweru hi nyoxile',cat:'Páscoa',lang:'ro',parts:[
+    {type:'verse',label:'1ª Estrofe',text:'Hinkweru hi nyoxile, \nA hi yimbeleleni: \nAleluia, aleluia\nHosi Yesu a pfukile. '},
+    {type:'verse',label:'2ª Estrofe',text:'A feli hine Kristo\nHi ko ku doha kweru\nA te ta fela hine\nA lahliwe sirheni.'},
+    {type:'verse',label:'3ª Estrofe',text:'A yetlelile kone\nA masiku manharu;\nA pfukile ni wuhosi\nNi ntamu lo\'wukulu.'}
+  ]},
+  {id:'new_195_ro_1776169622494',num:'195',title:'Kanimambo Mamana Maria',cat:'Mariano',lang:'ro',parts:[
+    {type:'chorus',label:'Refrão',text:'Kanimambo kanimambo\nKanimambo Mamana Maria'},
+    {type:'verse',label:'1ª Estrofe',text:'A Nazaré u yingeli a ntrumi... Coro: Kanimambo kanimambo Kanimambo Mamana Maria\nKhanimambo Mamana Maria \nYi ku byeliki ku randra ka Hosi\nkhanimambo Mamana Maria\nUva u pfumela uku im..................\nKhanimambo Mamana Maria\nU hi dondrisa na hine ku pfumela...\nKhanimambo Mamana Maria'},
+    {type:'verse',label:'2ª Estrofe',text:'Le Ali-kari u yendreli Isabel.\nUya mu nika ni wupfunu braku\nAva a trhava hi liyendro draku.\nU hi dondrisa na hine a ku pfunana'},
+    {type:'verse',label:'3ª Estrofe',text:'A Belém u veleki Muhuluxi\nU tramiki naye ku kuleni kwakwe\nNa umu tirela hi lirandro\nU hi drondrisa ku hanya na yene'},
+    {type:'verse',label:'4ª Estrofe',text:'A Yerusalema u fambi ni Nwanaku.\nUya mu nyikela a tempeleni\nNa u landra a buku dra nawu..\nU hi drondrisa ku lumba a Kereke.'},
+    {type:'verse',label:'5ª Estrofe',text:'A Kanan u byeli a vatiri.\nKuva va landra marito ya Kriste\nNtraku hinkwavu va kumi ku trava\nU hi dondrisa a ku yingiseta'},
+    {type:'verse',label:'6ª Estrofe',text:'Kusuhi ni Xihambanu xa Nwanaku\nU tiyisilile hambi swi ku vavisa\nHikuva leyo avi ndlela ya huluxu\nU hi drondrisa a ku tiyisela'}
   ]}
 ];
 
@@ -4805,6 +4858,15 @@ function openGitonga(){
   allTabs.forEach(function(t){t.classList.remove('active');});
   var gtTab = document.querySelector('#outros-lang-tabs .ltab[data-lang="gt"]');
   if(gtTab){gtTab.classList.add('active'); outrosLang='gt'; renderOutros();}
+  showScreen('s-outros');
+}
+
+function openPortugues(){
+  initOutros();
+  var allTabs = document.querySelectorAll('#outros-lang-tabs .ltab');
+  allTabs.forEach(function(t){t.classList.remove('active');});
+  var ptTab = document.querySelector('#outros-lang-tabs .ltab[data-lang="pt"]');
+  if(ptTab){ptTab.classList.add('active'); outrosLang='pt'; renderOutros();}
   showScreen('s-outros');
 }
 
