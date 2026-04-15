@@ -4965,19 +4965,33 @@ function openSection(sec){
 
 function openGitonga(){
   initOutros();
-  var allTabs = document.querySelectorAll('#outros-lang-tabs .ltab');
-  allTabs.forEach(function(t){t.classList.remove('active');});
+  // Forza solo Gitonga
+  outrosLang = 'gt';
+  document.querySelectorAll('#outros-lang-tabs .ltab').forEach(function(t){t.classList.remove('active');});
   var gtTab = document.querySelector('#outros-lang-tabs .ltab[data-lang="gt"]');
-  if(gtTab){gtTab.classList.add('active'); outrosLang='gt'; renderOutros();}
+  if(gtTab) gtTab.classList.add('active');
+  // Titolo e tab lingua nascosti (solo Gitonga)
+  document.querySelector('#s-outros .sec-title').textContent = '🎶 Hi Ngu Lombelela';
+  document.getElementById('outros-lang-tabs').style.display = 'none';
+  // Aggiorna testo tasto back nel dettaglio
+  var backBtn = document.querySelector('#s-outros-detail .back-btn');
+  if(backBtn) backBtn.textContent = '← Hi Ngu Lombelela';
+  renderOutros();
   showScreen('s-outros');
 }
 
 function openPortugues(){
   initOutros();
-  var allTabs = document.querySelectorAll('#outros-lang-tabs .ltab');
-  allTabs.forEach(function(t){t.classList.remove('active');});
+  // Ripristina titolo e tab lingua visibili
+  document.querySelector('#s-outros .sec-title').textContent = '🎶 Outros Cânticos';
+  document.getElementById('outros-lang-tabs').style.display = '';
+  var backBtn = document.querySelector('#s-outros-detail .back-btn');
+  if(backBtn) backBtn.textContent = '← Outros Cânticos';
+  outrosLang = 'pt';
+  document.querySelectorAll('#outros-lang-tabs .ltab').forEach(function(t){t.classList.remove('active');});
   var ptTab = document.querySelector('#outros-lang-tabs .ltab[data-lang="pt"]');
-  if(ptTab){ptTab.classList.add('active'); outrosLang='pt'; renderOutros();}
+  if(ptTab) ptTab.classList.add('active');
+  renderOutros();
   showScreen('s-outros');
 }
 
