@@ -285,6 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="btn-row" style="justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;">
           <button class="btn btn-gold btn-sm" onclick="copyCode()">📋 Copiar Código</button>
           <button class="btn btn-outline btn-sm" onclick="copyLink()">🔗 Copiar Link</button>
+          <button id="btn-sms" class="btn btn-sm" onclick="sendSmsViaRelay(document.getElementById('gen-contact').value, lastCode)" style="background:#1a5c8a;color:#fff;border:1px solid #2a7ab0;">📱 Enviar SMS</button>
         </div>
       </div>
     </div>
@@ -358,6 +359,10 @@ const URL_KEY      = "cr_admin_url";
 const HARDCODED_URL = "https://script.google.com/macros/s/AKfycbwc7f7YAr4T2WfKKqKgABVTp0DbzXgn142nHvhp0iT-ZMwGg3PVsRdsDHgQrQzto8GX/exec";
 let SCRIPT_URL = localStorage.getItem(URL_KEY) || HARDCODED_URL;
 let registryData = [];
+
+// SMS Relay
+const GAS_URL = "https://script.google.com/macros/s/AKfycbzSyjWp7oZjaF6-Rs191hy_phpMpVShV31v-ytFiRC9En7RMh5ZmX46qLVc9_6Q3-rE/exec";
+let lastCode = "";
 
 // ══════════════════════════════════════════════════════
 // SETUP
@@ -482,6 +487,7 @@ async function generateCode() {
   // Generate a unique code
   const id   = makeCodeId();
   const code = buildCode(id);
+  lastCode = code;
 
   setLoading("gen", true);
   try {
@@ -522,6 +528,58 @@ function buildWhatsAppMsg(code, name, payment) {
   const firstName = name.split(" ")[0];
   const link = `https://maver1967.github.io/cantar-e-rezar/?code=${code}`;
   return `Olá ${firstName}! 😊\n\nO teu contributo via ${payment} foi recebido. Obrigado!\n\nAqui está o teu acesso à app *Cantar e Rezar*:\n\n👉 ${link}\n\nAbre o link, o código já está preenchido. Toca apenas em *Activar*!\n\nBoa oração! ✝`;
+}
+
+async function sendSmsViaRelay(phone, code) {
+  const btn = document.getElementById("btn-sms");
+  if (!phone || phone.length < 8) {
+    alert("⚠️ Número de telefone inválido. Verifique o campo Contacto.");
+    return;
+  }
+  let normalized = phone.replace(/[\s\-\(\)]/g, "");
+  if (normalized.startsWith("00")) normalized = normalized.slice(2);
+  if (normalized.startsWith("+"))  normalized = normalized.slice(1);
+  if (!normalized.startsWith("258") && normalized.length === 9) normalized = "258" + normalized;
+
+  const appUrl  = "https://maver1967.github.io/cantar-e-rezar/?code=" + code;
+  const message = "🎵 Cantar e Rezar\nO seu código de activação: " + code + "\nOu abra directamente:\n" + appUrl;
+
+  btn.textContent = "⏳ A enviar...";
+  btn.disabled = true;
+  try {
+    const resp = await fetch(GAS_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ secret: ADMIN_SECRET, phone: normalized, message, codigo: code })
+    });
+    const result = await resp.json();
+    if (result.ok) {
+      btn.textContent = "✅ SMS na fila!";
+      btn.style.background = "var(--green)";
+      setTimeout(() => { btn.textContent = "📱 Enviar SMS"; btn.style.background = ""; btn.disabled = false; }, 4000);
+    } else {
+      throw new Error(result.error || "Erro desconhecido");
+    }
+  } catch(err) {
+    btn.textContent = "❌ Erro";
+    btn.disabled = false;
+    alert("Erro ao enviar SMS: " + err.message);
+  }
+}
+
+function copyLink() {
+  const link = document.getElementById("result-link").dataset.link || document.getElementById("result-link").textContent;
+  if (!link) return;
+  navigator.clipboard.writeText(link).then(() => {
+    document.getElementById("copy-note").textContent = "✓ Link copiado!";
+    setTimeout(() => { document.getElementById("copy-note").textContent = ""; }, 2000);
+  }).catch(() => {
+    const ta = document.createElement("textarea");
+    ta.value = link; document.body.appendChild(ta); ta.select();
+    document.execCommand("copy"); document.body.removeChild(ta);
+    document.getElementById("copy-note").textContent = "✓ Link copiado!";
+    setTimeout(() => { document.getElementById("copy-note").textContent = ""; }, 2000);
+  });
 }
 
 function copyCode() {
