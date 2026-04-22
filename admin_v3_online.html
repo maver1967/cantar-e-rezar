@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="btn-row" style="justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;">
           <button class="btn btn-gold btn-sm" onclick="copyCode()">📋 Copiar Código</button>
           <button class="btn btn-outline btn-sm" onclick="copyLink()">🔗 Copiar Link</button>
-          <button id="btn-sms" class="btn btn-sm" onclick="sendSmsViaRelay(lastContact, lastCode)" style="background:#1a5c8a;color:#fff;border:1px solid #2a7ab0;">📱 Enviar SMS</button>
+          <button id="btn-sms" class="btn btn-sm" onclick="sendSmsViaRelay(document.getElementById('gen-contact').value, lastCode)" style="background:#1a5c8a;color:#fff;border:1px solid #2a7ab0;">📱 Enviar SMS</button>
         </div>
       </div>
     </div>
@@ -363,7 +363,6 @@ let registryData = [];
 // SMS Relay
 const GAS_URL = "https://script.google.com/macros/s/AKfycbzSyjWp7oZjaF6-Rs191hy_phpMpVShV31v-ytFiRC9En7RMh5ZmX46qLVc9_6Q3-rE/exec";
 let lastCode = "";
-let lastContact = "";
 
 // ══════════════════════════════════════════════════════
 // SETUP
@@ -515,7 +514,6 @@ async function generateCode() {
     // Reload stats
     loadRegistry();
     // Clear form
-    lastContact = document.getElementById("gen-contact").value;
     document.getElementById("gen-name").value    = "";
     document.getElementById("gen-contact").value = "";
     document.getElementById("gen-notes").value   = "";
@@ -549,12 +547,15 @@ async function sendSmsViaRelay(phone, code) {
   btn.textContent = "⏳ A enviar...";
   btn.disabled = true;
   try {
-    const resp = await fetch(GAS_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ secret: ADMIN_SECRET, phone: normalized, message, codigo: code })
-    });
-    const result = await resp.json();
+    const url = GAS_URL
+      + "?secret=" + encodeURIComponent(ADMIN_SECRET)
+      + "&action=queue"
+      + "&phone=" + encodeURIComponent(normalized)
+      + "&message=" + encodeURIComponent(message)
+      + "&codigo=" + encodeURIComponent(code);
+    const resp = await fetch(url);
+    const text = await resp.text();
+    const result = JSON.parse(text);
     if (result.ok) {
       btn.textContent = "✅ SMS na fila!";
       btn.style.background = "var(--green)";
