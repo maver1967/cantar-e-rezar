@@ -5948,13 +5948,13 @@ function getSwipePool(){
 }
 function getGtSwipePool(){
   // Pool unificato: CANTI_GITONGA + CANTICOS_OUTROS, filtrati per lingua e categoria
-  let items = getAllOutros();
+  let items = [...CANTI_GITONGA];
   if(outrosLang !== 'all') items = items.filter(s=>s.lang===outrosLang);
   if(gtFilter !== 'all') items = items.filter(s=>hascat(s,gtFilter));
   return items;
 }
 function getAllOutros(){
-  return [...CANTI_GITONGA, ...CANTICOS_OUTROS];
+  return [...CANTICOS_OUTROS];
 }
 
 function setLangTab(btn, lang){
@@ -6134,7 +6134,7 @@ function renderOutros(){
 
 function showGitonga(id){
   // Cerca in entrambi gli array
-  const s = getAllOutros().find(c=>String(c.id)===id);
+  const s = [...CANTI_GITONGA, ...CANTICOS_OUTROS].find(c=>String(c.id)===id);
   if(!s) return;
   currentGtId = id;
   document.getElementById('gtd-num').textContent = s.num+' ';
