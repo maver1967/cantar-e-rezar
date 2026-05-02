@@ -5957,6 +5957,10 @@ function getGtSwipePool(){
 }
 var currentSection = 'outros';
 var __outrosTitleOrig = '';
+function hascat(s, filter){
+  if(!s || !s.cat) return false;
+  return s.cat.split(',').map(function(x){return x.trim();}).indexOf(filter) !== -1;
+}
 function getAllOutros(){
   return currentSection === 'gitonga' ? [...CANTI_GITONGA] : [...CANTICOS_OUTROS];
 }
