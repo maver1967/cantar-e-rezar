@@ -5880,7 +5880,7 @@ function goSection(sec){openSection(sec);}
 
 function openSection(sec){
   if(sec==='canticos'){initCanticos();showScreen('s-canticos');}
-  else if(sec==='outros'){currentSection='outros';initOutros();showScreen('s-outros');}
+  else if(sec==='outros'){currentSection='outros';outrosLang='all';var langTabs=document.getElementById('outros-lang-tabs');if(langTabs)langTabs.style.display='';document.querySelector('#s-outros .sec-title').textContent='\u{1F3B6} Outros C\u00e2nticos';initOutros();showScreen('s-outros');}
   else if(sec==='oracoes-rosario'){showScreen('s-oracoes-rosario');}
   else if(sec==='oracoes'){initOracoes();showScreen('s-oracoes');}
   else if(sec==='rosario'){initRosario();showScreen('s-rosario');}
