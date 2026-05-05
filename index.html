@@ -6333,14 +6333,21 @@ function goToActivation(){showScreen('s-activation');}
 (function(){
   const stored=localStorage.getItem(STORAGE_KEY);
   if(stored==='ACTIVATED'){showHome();return;}
-  // Fallback: riprova dal codice grezzo salvato
+  // Fallback 1: riprova dal codice grezzo salvato
   const savedCode=localStorage.getItem(STORAGE_KEY+'_code');
   if(savedCode&&validateCode(savedCode)){
     localStorage.setItem(STORAGE_KEY,'ACTIVATED');
     showHome();return;
   }
-  // Se il link contiene ?v=... mostriamo prima il poster verticale
+  // Fallback 2: leggi ?code= dall'URL (utile se IIFE 1 fallisce o localStorage e' stato cancellato)
   const params=new URLSearchParams(window.location.search);
+  const urlCodeFB=params.get('code');
+  if(urlCodeFB&&validateCode(urlCodeFB)){
+    localStorage.setItem(STORAGE_KEY+'_code', urlCodeFB.toUpperCase().trim());
+    localStorage.setItem(STORAGE_KEY,'ACTIVATED');
+    showHome();return;
+  }
+  // Se il link contiene ?v=... mostriamo prima il poster verticale
   if(params.has('v')){
     showScreen('s-landing');
     return;
