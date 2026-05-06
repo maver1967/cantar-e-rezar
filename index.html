@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#120800">
+<meta name="theme-color" content="#1a2440">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <title>Cantar e Rezar</title>
@@ -45,16 +45,16 @@
   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:      #0e0700;
-  --bg2:     #1a0e00;
-  --bg3:     #221400;
+  --bg:      #1a2440;
+  --bg2:     #1f2a4a;
+  --bg3:     #243358;
   --gold:    #c8960c;
   --gold2:   #e8b832;
   --gold-d:  #7a5a08;
   --cream:   #f5ead8;
   --cream2:  #d4c4a0;
   --text2:   #9a8866;
-  --border:  #332200;
+  --border:  #3a4a78;
   --red:     #8b1a1a;
   --green:   #1a4a20;
   --blue:    #0a2a50;
@@ -67,9 +67,9 @@ body.light {
   --gold:    #8a6200;
   --gold2:   #b07800;
   --gold-d:  #9a7010;
-  --cream:   #1e0e00;
-  --cream2:  #3a2200;
-  --text2:   #6a5030;
+  --cream:   #1a2440;
+  --cream2:  #2c3a66;
+  --text2:   #4a5a8a;
   --border:  #d4b878;
   --red:     #8b1a1a;
   --green:   #1a4a20;
@@ -90,7 +90,7 @@ body.light .act-input,
 body.light .bib-search input{
   background-color:#fff;
   background-image:none;
-  color:#1e0e00;
+  color:#1a2440;
   border:2px solid #b8943a;
   box-shadow:inset 0 1px 4px rgba(100,70,0,.08);
 }
@@ -208,7 +208,7 @@ body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg);color:var(--cr
 
 /* ═══ HOME ═══ */
 #s-home{overflow-y:auto;}
-.home-header{background:linear-gradient(180deg,#200d00,var(--bg2));padding:1.25rem 1.25rem .75rem;text-align:center;border-bottom:1px solid var(--border);}
+.home-header{background:linear-gradient(180deg,#1f2a4a,var(--bg2));padding:1.25rem 1.25rem .75rem;text-align:center;border-bottom:1px solid var(--border);}
 .home-logo{font-family:'IM Fell English',serif;font-size:1.6rem;color:var(--gold);display:flex;align-items:center;justify-content:center;gap:.5rem;}
 .home-logo span{font-size:1.3rem;}
 .home-tagline{font-size:.82rem;color:var(--text2);font-style:italic;margin-top:.25rem;}
@@ -242,7 +242,7 @@ body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg);color:var(--cr
 
 
 /* ═══ GENERIC HEADER (sections) ═══ */
-.sec-header{background:linear-gradient(180deg,#200d00,var(--bg2));border-bottom:1px solid var(--border);padding:.85rem 1.25rem;flex-shrink:0;}
+.sec-header{background:linear-gradient(180deg,#1f2a4a,var(--bg2));border-bottom:1px solid var(--border);padding:.85rem 1.25rem;flex-shrink:0;}
 .back-btn{display:flex;align-items:center;gap:.5rem;color:var(--gold2);background:rgba(200,150,12,.13);border:1px solid rgba(200,150,12,.35);border-radius:20px;font-family:'Crimson Pro',serif;font-size:1.05rem;cursor:pointer;padding:.35rem .85rem .35rem .65rem;margin-bottom:.5rem;transition:all .2s;}
 .back-btn:hover{color:var(--gold);}
 .sec-title{font-family:'IM Fell English',serif;font-size:1.45rem;color:var(--gold2);}
@@ -262,7 +262,7 @@ body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg);color:var(--cr
 .ftab{flex-shrink:0;padding:.4rem 1rem;border:1px solid var(--border);border-radius:20px;font-size:.95rem;color:var(--text2);cursor:pointer;background:var(--bg2);transition:all .2s;white-space:nowrap;}
 .ftab.active,.ftab:hover{background:var(--gold);color:var(--bg);border-color:var(--gold);}
 
-.list-item{display:flex;flex-direction:column;align-items:center;text-align:center;padding:1.1rem 1.25rem;border-bottom:1px solid #1e1000;cursor:pointer;transition:background .15s;gap:.25rem;}
+.list-item{display:flex;flex-direction:column;align-items:center;text-align:center;padding:1.1rem 1.25rem;border-bottom:1px solid #243358;cursor:pointer;transition:background .15s;gap:.25rem;}
 .list-item:hover{background:var(--bg2);}
 .list-item:active{background:var(--bg3);}
 .li-num{font-family:'IM Fell English',serif;font-size:2rem;color:var(--gold-d);line-height:1;}
@@ -298,7 +298,7 @@ body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg);color:var(--cr
 .fab:hover{background:var(--bg3);border-color:var(--gold-d);}
 
 /* ═══ PRAYERS ═══ */
-.prayer-item{padding:1rem 1.25rem;border-bottom:1px solid #1e1000;cursor:pointer;transition:background .15s;}
+.prayer-item{padding:1rem 1.25rem;border-bottom:1px solid #243358;cursor:pointer;transition:background .15s;}
 .prayer-item:hover{background:var(--bg2);}
 .prayer-item:active{background:var(--bg3);}
 .pi-title{font-family:'IM Fell English',serif;font-size:1.1rem;color:var(--cream);}
@@ -370,7 +370,7 @@ body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg);color:var(--cr
 .bib-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg2);flex-shrink:0;}
 .btab{flex:1;padding:.85rem .5rem;text-align:center;font-family:'IM Fell English',serif;font-size:1.1rem;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;}
 .btab.active{color:var(--gold);border-bottom-color:var(--gold);}
-.book-item{padding:.85rem 1.25rem;border-bottom:1px solid #1e1000;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .15s;}
+.book-item{padding:.85rem 1.25rem;border-bottom:1px solid #243358;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .15s;}
 .book-item:hover{background:var(--bg2);}
 .book-item:active{background:var(--bg3);}
 .book-name{font-family:'IM Fell English',serif;font-size:1.15rem;color:var(--cream);}
@@ -393,7 +393,7 @@ body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg);color:var(--cr
 /* ═══ PWA INSTALL BANNER ═══ */
 #pwa-banner{
   position:fixed;bottom:0;left:0;right:0;z-index:9999;
-  background:linear-gradient(0deg,#1a0e00,var(--bg2));
+  background:linear-gradient(0deg,#1f2a4a,var(--bg2));
   border-top:1px solid var(--gold-d);
   padding:1rem 1.25rem 1.25rem;
   display:flex;flex-direction:column;align-items:center;gap:.75rem;
