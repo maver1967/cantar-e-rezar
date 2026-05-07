@@ -1,4 +1,4 @@
-// Cantar e Rezar - Service Worker v7 (fix clone race + skip POST)
+// Cantar e Rezar - Service Worker v7
 const CACHE = 'cantar-e-rezar-v7';
 
 const PRECACHE_URLS = [
@@ -6,7 +6,6 @@ const PRECACHE_URLS = [
   '/cantar-e-rezar/index.html',
 ];
 
-// — INSTALL: pre-cache la pagina —
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE).then(async cache => {
@@ -16,16 +15,10 @@ self.addEventListener('install', e => {
           if (res.ok) await cache.put(url, res);
         } catch (_) {}
       }
-      try {
-        const fontUrl = 'https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap';
-        const fres = await fetch(new Request(fontUrl, { mode: 'no-cors' }));
-        await cache.put(fontUrl, fres);
-      } catch (_) {}
     }).then(() => self.skipWaiting())
   );
 });
 
-// — ACTIVATE: pulisce vecchie cache —
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys()
@@ -36,23 +29,19 @@ self.addEventListener('activate', e => {
   );
 });
 
-// — MESSAGE: skip waiting on demand —
 self.addEventListener('message', e => {
   if (e.data && e.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
-// — FETCH —
 self.addEventListener('fetch', e => {
   const req = e.request;
-  const url = new URL(req.url);
 
-  // 0. SKIP non-GET (POST/PUT/DELETE vanno al network — niente cache per le API)
   if (req.method !== 'GET') return;
 
-  // 0b. SKIP richieste cross-origin verso Google Apps Script o altri backend
-  if (url.hostname.includes('script.google.com') || url.hostname.includes('googleusercontent.com')) return;
+  const url = new URL(req.url);
 
-  // 1. Navigazione → NETWORK-FIRST con timeout 3s, poi cache
+  if (url.origin !== self.location.origin) return;
+
   if (req.mode === 'navigate') {
     e.respondWith(
       Promise.race([
@@ -71,21 +60,6 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // 2. Font Google → cache-first (fix: clone PRIMA di cache.put)
-  if (url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com')) {
-    e.respondWith(
-      caches.match(req).then(cached => cached ||
-        fetch(new Request(req, { mode: 'no-cors' })).then(res => {
-          const clone = res.clone();
-          caches.open(CACHE).then(c => c.put(req, clone));
-          return res;
-        }).catch(() => new Response('', { status: 408 }))
-      )
-    );
-    return;
-  }
-
-  // 3. Tutto il resto → stale-while-revalidate (fix: clone PRIMA)
   e.respondWith(
     caches.match(req).then(cached => {
       const fresh = fetch(req).then(res => {
