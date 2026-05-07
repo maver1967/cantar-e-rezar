@@ -1,5 +1,5 @@
-// Cantar e Rezar — Service Worker v6
-const CACHE = 'cantar-e-rezar-v6';
+// Cantar e Rezar - Service Worker v7 (fix clone race + skip POST)
+const CACHE = 'cantar-e-rezar-v7';
 
 const PRECACHE_URLS = [
   '/cantar-e-rezar/',
@@ -46,6 +46,12 @@ self.addEventListener('fetch', e => {
   const req = e.request;
   const url = new URL(req.url);
 
+  // 0. SKIP non-GET (POST/PUT/DELETE vanno al network — niente cache per le API)
+  if (req.method !== 'GET') return;
+
+  // 0b. SKIP richieste cross-origin verso Google Apps Script o altri backend
+  if (url.hostname.includes('script.google.com') || url.hostname.includes('googleusercontent.com')) return;
+
   // 1. Navigazione → NETWORK-FIRST con timeout 3s, poi cache
   if (req.mode === 'navigate') {
     e.respondWith(
@@ -65,12 +71,13 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // 2. Font Google → cache-first
+  // 2. Font Google → cache-first (fix: clone PRIMA di cache.put)
   if (url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com')) {
     e.respondWith(
       caches.match(req).then(cached => cached ||
         fetch(new Request(req, { mode: 'no-cors' })).then(res => {
-          caches.open(CACHE).then(c => c.put(req, res.clone()));
+          const clone = res.clone();
+          caches.open(CACHE).then(c => c.put(req, clone));
           return res;
         }).catch(() => new Response('', { status: 408 }))
       )
@@ -78,11 +85,14 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // 3. Tutto il resto → stale-while-revalidate
+  // 3. Tutto il resto → stale-while-revalidate (fix: clone PRIMA)
   e.respondWith(
     caches.match(req).then(cached => {
       const fresh = fetch(req).then(res => {
-        if (res.ok) caches.open(CACHE).then(c => c.put(req, res.clone()));
+        if (res.ok) {
+          const clone = res.clone();
+          caches.open(CACHE).then(c => c.put(req, clone));
+        }
         return res;
       }).catch(() => cached || new Response('Offline', { status: 503 }));
       return cached || fresh;
