@@ -5894,6 +5894,8 @@ function tryActivate(){
   if(urlCode&&validateCode(urlCode)){
     window._openedViaLink = true;
     localStorage.setItem(STORAGE_KEY+'_code', urlCode.toUpperCase().trim());
+    // Reset dismiss flag: ogni nuovo link riabilita la proposta di installazione
+    localStorage.removeItem('pwa_banner_dismissed');
     tryActivate();
   }
 })();
@@ -6646,6 +6648,17 @@ if ('serviceWorker' in navigator) {
   // iOS Safari: no beforeinstallprompt, show manual immediately
   if (isIOS && isSafari && !isRunningAsPWA()) {
     scheduleShowModal();
+  }
+
+  // Fallback: se l'utente ha appena attivato via link e dopo 2.5s
+  // beforeinstallprompt non è arrivato (es. Chrome ricorda installazione precedente),
+  // mostriamo comunque il modal con istruzioni manuali.
+  if (!isIOS && !isRunningAsPWA() && window._openedViaLink) {
+    setTimeout(function() {
+      if (!deferredPrompt) {
+        scheduleShowModal();
+      }
+    }, 2500);
   }
 
   function scheduleShowModal() {
