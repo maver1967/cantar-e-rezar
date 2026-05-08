@@ -444,7 +444,30 @@ body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg);color:var(--cr
 .inst-btn-yes:hover{background:var(--gold2);}
 .inst-btn-no{background:transparent;color:var(--text2);border:1px solid var(--border);border-radius:3px;font-family:'Crimson Pro',serif;font-size:.88rem;padding:.65rem;cursor:pointer;transition:all .2s;}
 .inst-btn-no:hover{border-color:var(--gold-d);color:var(--cream2);}
-</style>
+/* Patch leggibilità testi secondari su sfondo scuro */
+input::placeholder,
+textarea::placeholder {
+  color: #e8c547 !important;
+  opacity: 0.85 !important;
+}
+
+/* Etichette tipo "Entrada", "Saída", ecc. sotto il titolo del cantico */
+.song-category,
+.cantico-categoria,
+.song-meta,
+.categoria-label {
+  color: #e8c547 !important;
+  opacity: 1 !important;
+}
+
+/* Etichette "Estrofe", "Refrão" dentro i canti */
+.estrofe-label,
+.verse-label,
+.refrao-label,
+.lyrics-label {
+  color: #f5d76e !important;
+  opacity: 1 !important;
+}</style>
 </head>
 <body>
 
