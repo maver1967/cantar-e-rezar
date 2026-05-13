@@ -487,41 +487,65 @@ textarea::placeholder {
   <div class="act-title">Cantar e Rezar</div>
   <div class="act-sub">Louvor e oração para o povo de Deus.</div>
   <div class="act-card">
-    <p>Para utilizar esta App, faça o seu contributo de <strong style="color:var(--gold);">50 Mt</strong> via M-Pesa ou e-Mola para o número abaixo.</p>
+      <p>Para utilizar esta App, faça o seu contributo de <strong style="color:var(--gold);">50 Mt</strong> via M-Pesa ou e-Mola.</p>
 
-    <p style="font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-d);margin:0 0 .4rem;text-align:left;">M-Pesa</p>
-    <div class="pay-row">
-      <button class="btn-number" onclick="copyNumber(this,'847339220','copy-hint-mpesa')">
-        <span class="btn-number-label">Toque para copiar</span>
-        <span class="btn-number-num">84 733 9220</span>
-        <span class="btn-number-hint" id="copy-hint-mpesa">📋 copiar</span>
-      </button>
-      <a class="btn-mpesa" href="tel:*150*1*847339220*50%23">
-        <span style="font-size:1.4em;">📲</span>
-        <span>Pagar 50 Mt</span>
-      </a>
+      <div id="pay-step-choice" class="pay-step">
+        <p style="margin:.8rem 0 .8rem;color:var(--cream);text-align:center;font-size:.9rem;">Escolha o método de pagamento:</p>
+        <div style="display:flex;gap:.6rem;margin-bottom:.4rem;">
+          <button onclick="payStep('mpesa')" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.4rem;background:var(--bg3);border:2px solid var(--gold-d);border-radius:8px;padding:.8rem .5rem;cursor:pointer;color:var(--cream);font-family:inherit;">
+            <img src="icons/mpesa.png" alt="M-Pesa" style="width:64px;height:64px;border-radius:8px;">
+            <span style="font-size:.9rem;font-weight:600;letter-spacing:.03em;">M-Pesa</span>
+          </button>
+          <button onclick="payStep('emola')" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.4rem;background:var(--bg3);border:2px solid var(--gold-d);border-radius:8px;padding:.8rem .5rem;cursor:pointer;color:var(--cream);font-family:inherit;">
+            <img src="icons/emola.png" alt="e-Mola" style="width:64px;height:64px;border-radius:8px;">
+            <span style="font-size:.9rem;font-weight:600;letter-spacing:.03em;">e-Mola</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="pay-step-mpesa" class="pay-step" style="display:none;">
+        <button onclick="payStep('choice')" style="background:none;border:none;color:var(--gold);font-size:.85rem;cursor:pointer;padding:.3rem 0;margin-bottom:.4rem;font-family:inherit;">← Voltar</button>
+        <p style="font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-d);margin:0 0 .4rem;text-align:left;">M-Pesa · Vodacom</p>
+        <button class="btn-number" onclick="copyNumber(this,'847339220','copy-hint-mpesa')">
+          <span class="btn-number-label">Toque para copiar</span>
+          <span class="btn-number-num">84 733 9220</span>
+          <span class="btn-number-hint" id="copy-hint-mpesa">📋 copiar</span>
+        </button>
+        <a class="btn-mpesa" href="tel:*150*1*847339220*50%23" style="margin-top:.6rem;">
+          <span style="font-size:1.4em;">📱</span>
+          <span>Pagar 50 Mt via M-Pesa</span>
+        </a>
+      </div>
+
+      <div id="pay-step-emola" class="pay-step" style="display:none;">
+        <button onclick="payStep('choice')" style="background:none;border:none;color:var(--gold);font-size:.85rem;cursor:pointer;padding:.3rem 0;margin-bottom:.4rem;font-family:inherit;">← Voltar</button>
+        <p style="font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-d);margin:0 0 .4rem;text-align:left;">e-Mola · Movitel</p>
+        <button class="btn-number" onclick="copyNumber(this,'874550153','copy-hint-emola')">
+          <span class="btn-number-label">Toque para copiar</span>
+          <span class="btn-number-num">87 455 0153</span>
+          <span class="btn-number-hint" id="copy-hint-emola">📋 copiar</span>
+        </button>
+        <a class="btn-mpesa" href="tel:*898%23" style="background:#0072c6;margin-top:.6rem;">
+          <span style="font-size:1.4em;">📱</span>
+          <span>Pagar 50 Mt via e-Mola</span>
+        </a>
+      </div>
+
+      <script>
+      function payStep(step){
+        document.getElementById('pay-step-choice').style.display = step === 'choice' ? '' : 'none';
+        document.getElementById('pay-step-mpesa').style.display = step === 'mpesa' ? '' : 'none';
+        document.getElementById('pay-step-emola').style.display = step === 'emola' ? '' : 'none';
+      }
+      </script>
+
+      <p style="font-size:.82em;color:#a89060;margin:.85rem 0 0;text-align:center;">Após o pagamento, receberá o link de activação.</p>
+      <p style="font-size:.85em;color:#e8b832;margin:.9rem 0 0;text-align:center;background:rgba(139,26,26,.18);border:1px solid rgba(232,184,50,.35);border-radius:8px;padding:.7rem .8rem;line-height:1.45;">⚠️ <strong>Atenção:</strong> não utilize as aplicações M-Pesa ou e-Mola directamente, pois não enviam o seu número de telefone, necessário para lhe enviarmos a mensagem com o código de activação.</p>
+      <div class="act-err" id="act-err"></div>
     </div>
-
-    <p style="font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-d);margin:.85rem 0 .4rem;text-align:left;">e-Mola</p>
-    <div class="pay-row">
-      <button class="btn-number" onclick="copyNumber(this,'874550153','copy-hint-emola')">
-        <span class="btn-number-label">Toque para copiar</span>
-        <span class="btn-number-num">87 455 0153</span>
-        <span class="btn-number-hint" id="copy-hint-emola">📋 copiar</span>
-      </button>
-      <a class="btn-mpesa" href="tel:*898%23" style="background:#0072c6;">
-        <span style="font-size:1.4em;">📲</span>
-        <span>Pagar 50 Mt</span>
-      </a>
-    </div>
-
-    <p style="font-size:.82em;color:#a89060;margin:.85rem 0 0;text-align:center;">Após o pagamento, receberá o link de activação.</p>
-    <p style="font-size:.85em;color:#e8b832;margin:.9rem 0 0;text-align:center;background:rgba(139,26,26,.18);border:1px solid rgba(232,184,50,.35);border-radius:8px;padding:.7rem .8rem;line-height:1.45;">⚠️ <strong>Atenção:</strong> não utilize as aplicações M-Pesa ou e-Mola directamente, pois não enviam o seu número de telefone, necessário para lhe enviarmos a mensagem com o código de activação.</p>
-    <div class="act-err" id="act-err"></div>
   </div>
-</div>
 
-<!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════
      SCREEN 2: HOME
 ══════════════════════════════════════════ -->
 <div id="s-home" class="screen">
